@@ -21,6 +21,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 import '../../android/state.dart';
+import '../../core/models.dart';
 import '../../core/state.dart';
 import '../../generated/l10n/app_localizations.dart';
 import '../../management/models.dart';
@@ -140,7 +141,7 @@ String _getDeviceInfoString(BuildContext context, DeviceInfo info) {
   final serial = info.serial;
   return [
     if (serial != null) l10n.s_sn_serial(serial),
-    if (info.version.isAtLeast(1))
+    if (info.version != const Version(0, 0, 0))
       l10n.s_fw_version(info.getVersionName())
     else
       l10n.s_unknown_type,

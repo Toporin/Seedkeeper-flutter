@@ -80,6 +80,7 @@ rm -rf $VENV
 uv run python -m venv $VENV
 $VENV/bin/pip install --upgrade pip wheel
 $VENV/bin/pip install dist/authenticator_helper-0.1.0-py3-none-any.whl pip-licenses
+$VENV/bin/pip install --force-reinstall ../../yubikey-manager
 $VENV/bin/pip-licenses --format=json --no-license-path --with-license-file --ignore-packages authenticator-helper zxing-cpp --output-file ../assets/licenses/helper.json
 cd ..
 
