@@ -1,7 +1,7 @@
 {
     "@@locale": "en",
 
-    "app_name": "Yubico Authenticator",
+    "app_name": "Seedkeeper PRO Manager",
     "native_language_name": "English",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -927,8 +927,8 @@
     "l_admin_privileges_required": "Administrator privileges required",
     "p_elevated_permissions_required": "Managing this device requires elevated privileges. Alternatively, you can use Windows Settings to manage FIDO configuration.",
     "p_webauthn_elevated_permissions_required": "WebAuthn management requires elevated privileges. Alternatively, you can use Windows Settings to manage FIDO configuration.",
-    "p_ms_store_permission_note": "The Microsoft Store version of the app is generally unable to elevate permissions due to sandboxing limitations of Windows. We recommend installing Yubico Authenticator from our official .msi installer.",
-    "p_need_camera_permission": "Yubico Authenticator needs Camera permissions for scanning QR codes.",
+    "p_ms_store_permission_note": "The Microsoft Store version of the app is generally unable to elevate permissions due to sandboxing limitations of Windows. We recommend installing Seedkeeper PRO Manager from our official .msi installer.",
+    "p_need_camera_permission": "Seedkeeper PRO Manager needs Camera permissions for scanning QR codes.",
     "@_qr_codes": {},
 
     "s_qr_scan": "Scan QR code",
@@ -1050,7 +1050,7 @@
     "l_on_yk_nfc_tap": "On NFC tap",
     "l_on_yk_usb_insert": "On USB insert",
     "l_do_nothing": "Do nothing",
-    "l_launch_ya": "Launch Yubico Authenticator",
+    "l_launch_ya": "Launch Seedkeeper PRO Manager",
     "l_copy_otp_clipboard": "Copy OTP to clipboard",
     "l_launch_and_copy_otp": "Launch app and copy OTP",
     "l_kbd_layout_for_static": "Keyboard layout (for static password)",

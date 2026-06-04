@@ -196,7 +196,7 @@ Future<Widget> initialize(List<String> argv) async {
   _initLicenses();
 
   await localNotifier.setup(
-    appName: 'Yubico Authenticator',
+    appName: 'Seedkeeper PRO Manager',
     shortcutPolicy: ShortcutPolicy.ignore,
   );
 

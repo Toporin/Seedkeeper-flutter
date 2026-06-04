@@ -1,7 +1,7 @@
 {
     "@@locale": "pt",
 
-    "app_name": "Autenticador Yubico",
+    "app_name": "Seedkeeper PRO Manager",
     "native_language_name": "Português (Brasil)",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -927,8 +927,8 @@
     "l_admin_privileges_required": "Privilégios de administrador necessários",
     "p_elevated_permissions_required": "Para gerenciar esse dispositivo são necessários privilégios elevados. Como alternativa, você pode usar as Configurações do Windows para gerenciar a configuração FIDO.",
     "p_webauthn_elevated_permissions_required": "O gerenciamento de WebAuthn exige privilégios elevados. Alternativamente, você pode usar as Configurações do Windows para gerenciar a configuração FIDO.",
-    "p_ms_store_permission_note": "A versão da Microsoft Store geralmente não consegue elevar permissões devido a limitações de isolamento (sandboxing) do Windows. Recomendamos instalar o Yubico Authenticator pelo nosso instalador .msi oficial.",
-    "p_need_camera_permission": "O Autenticador Yubico precisa de permissões da câmera para escanear QR codes.",
+    "p_ms_store_permission_note": "A versão da Microsoft Store geralmente não consegue elevar permissões devido a limitações de isolamento (sandboxing) do Windows. Recomendamos instalar o Seedkeeper PRO Manager pelo nosso instalador .msi oficial.",
+    "p_need_camera_permission": "O Seedkeeper PRO Manager precisa de permissões da câmera para escanear QR codes.",
     "@_qr_codes": {},
 
     "s_qr_scan": "Escanear QR code",
@@ -1050,7 +1050,7 @@
     "l_on_yk_nfc_tap": "No toque NFC",
     "l_on_yk_usb_insert": "Na inserção USB",
     "l_do_nothing": "Não execute nenhuma ação",
-    "l_launch_ya": "Iniciar o Yubico Authenticator",
+    "l_launch_ya": "Iniciar o Seedkeeper PRO Manager",
     "l_copy_otp_clipboard": "Copiar OTP para a área de transferência",
     "l_launch_and_copy_otp": "Iniciar o app e copiar OTP",
     "l_kbd_layout_for_static": "Layout do teclado (para senha estática)",

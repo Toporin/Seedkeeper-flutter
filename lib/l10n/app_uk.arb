@@ -1,7 +1,7 @@
 {
     "@@locale": "uk",
 
-    "app_name": "Yubico  Authenticator",
+    "app_name": "Seedkeeper PRO Manager",
     "native_language_name": "Українська",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -927,8 +927,8 @@
     "l_admin_privileges_required": "Потрібні права адміністратора",
     "p_elevated_permissions_required": "Для керування цим пристроєм потрібні підвищені права. Або ж ви можете скористатися параметрами Windows для керування конфігурацією FIDO.",
     "p_webauthn_elevated_permissions_required": "Для керування WebAuthn потрібні підвищені права. Або ж ви можете скористатися параметрами Windows для керування конфігурацією FIDO.",
-    "p_ms_store_permission_note": "Версія програми з Microsoft Store зазвичай не може підвищувати дозволи через обмеження ізольованого програмного середовища Windows. Ми рекомендуємо встановити Yubico Authenticator з нашого офіційного інсталятора .msi.",
-    "p_need_camera_permission": "Yubico Authenticator потребує доступу до камери для сканування QR-кодів.",
+    "p_ms_store_permission_note": "Версія програми з Microsoft Store зазвичай не може підвищувати дозволи через обмеження ізольованого програмного середовища Windows. Ми рекомендуємо встановити Seedkeeper PRO Manager з нашого офіційного інсталятора .msi.",
+    "p_need_camera_permission": "Seedkeeper PRO Manager потребує доступу до камери для сканування QR-кодів.",
     "@_qr_codes": {},
 
     "s_qr_scan": "Відскануйте QR-код",
@@ -1050,7 +1050,7 @@
     "l_on_yk_nfc_tap": "Увімкнено NFC-дотик",
     "l_on_yk_usb_insert": "Увімкнено USB-вставка",
     "l_do_nothing": "Нічого не робити",
-    "l_launch_ya": "Запустіть Yubico Authenticator",
+    "l_launch_ya": "Запустіть Seedkeeper PRO Manager",
     "l_copy_otp_clipboard": "Копіювати одноразовий пароль OTP у буфер обміну",
     "l_launch_and_copy_otp": "Запустіть програму та скопіюйте OTP",
     "l_kbd_layout_for_static": "Розкладка клавіатури (для статичного пароля)",

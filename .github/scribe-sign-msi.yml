@@ -6,6 +6,6 @@ jobs:
     steps:
       - id: 1
         action: windows
-        description: Yubico Authenticator
+        description: Seedkeeper PRO Manager
         files:
           - installer/yubioath-desktop.msi

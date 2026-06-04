@@ -1,7 +1,7 @@
 {
     "@@locale": "vi",
 
-    "app_name": "Yubico Authenticator",
+    "app_name": "Seedkeeper PRO Manager",
     "native_language_name": "Tiếng Việt",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -928,7 +928,7 @@
     "p_elevated_permissions_required": "Quản lý thiết bị này yêu cầu quyền quản trị. Bạn cũng có thể sử dụng Cài đặt Windows để quản lý cấu hình FIDO.",
     "p_webauthn_elevated_permissions_required": "Quản lý WebAuthn yêu cầu quyền quản trị. Bạn cũng có thể sử dụng Cài đặt Windows để quản lý cấu hình FIDO.",
     "p_ms_store_permission_note": null,
-    "p_need_camera_permission": "Yubico Authenticator cần quyền truy cập Camera để quét mã QR.",
+    "p_need_camera_permission": "Seedkeeper PRO Manager cần quyền truy cập Camera để quét mã QR.",
     "@_qr_codes": {},
 
     "s_qr_scan": "Quét mã QR",
@@ -1050,7 +1050,7 @@
     "l_on_yk_nfc_tap": null,
     "l_on_yk_usb_insert": null,
     "l_do_nothing": "Không làm gì",
-    "l_launch_ya": "Khởi chạy Yubico Authenticator",
+    "l_launch_ya": "Khởi chạy Seedkeeper PRO Manager",
     "l_copy_otp_clipboard": "Sao chép OTP vào clipboard",
     "l_launch_and_copy_otp": "Khởi chạy ứng dụng và sao chép OTP",
     "l_kbd_layout_for_static": "Bố cục bàn phím (cho mật khẩu tĩnh)",

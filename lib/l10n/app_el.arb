@@ -1,7 +1,7 @@
 {
     "@@locale": "el",
 
-    "app_name": "Επαληθευτής Yubico",
+    "app_name": "Seedkeeper PRO Manager",
     "native_language_name": "Ελληνικά",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -927,8 +927,8 @@
     "l_admin_privileges_required": "Απαιτούνται δικαιώματα διαχειριστή",
     "p_elevated_permissions_required": "Η διαχείριση αυτής της συσκευής απαιτεί αυξημένα δικαιώματα. Εναλλακτικά, μπορείτε να χρησιμοποιήσετε τις Ρυθμίσεις των Windows για τη διαχείριση της διαμόρφωσης FIDO.",
     "p_webauthn_elevated_permissions_required": "Η διαχείριση WebAuthn απαιτεί αυξημένα δικαιώματα. Εναλλακτικά, μπορείτε να χρησιμοποιήσετε τις Ρυθμίσεις των Windows για τη διαχείριση της διαμόρφωσης FIDO.",
-    "p_ms_store_permission_note": "Η έκδοση της εφαρμογής από το Microsoft Store γενικά δεν μπορεί να αυξήσει τα δικαιώματα λόγω των περιορισμών sandboxing των Windows. Συνιστούμε να εγκαταστήσετε το Yubico Authenticator από το επίσημο πρόγραμμα εγκατάστασης .msi.",
-    "p_need_camera_permission": "Το Yubico Authenticator χρειάζεται δικαιώματα Κάμερας για τη σάρωση κωδικών QR.",
+    "p_ms_store_permission_note": "Η έκδοση της εφαρμογής από το Microsoft Store γενικά δεν μπορεί να αυξήσει τα δικαιώματα λόγω των περιορισμών sandboxing των Windows. Συνιστούμε να εγκαταστήσετε το Seedkeeper PRO Manager από το επίσημο πρόγραμμα εγκατάστασης .msi.",
+    "p_need_camera_permission": "Το Seedkeeper PRO Manager χρειάζεται δικαιώματα Κάμερας για τη σάρωση κωδικών QR.",
     "@_qr_codes": {},
 
     "s_qr_scan": "Σάρωση κωδικού QR",
@@ -1050,7 +1050,7 @@
     "l_on_yk_nfc_tap": "Με άγγιγμα NFC",
     "l_on_yk_usb_insert": "Κατά την εισαγωγή USB",
     "l_do_nothing": "Καμία ενέργεια",
-    "l_launch_ya": "Εκκίνηση του Yubico Authenticator",
+    "l_launch_ya": "Εκκίνηση του Seedkeeper PRO Manager",
     "l_copy_otp_clipboard": "Αντιγραφή OTP στο πρόχειρο",
     "l_launch_and_copy_otp": "Εκκίνηση εφαρμογής και αντιγραφή OTP",
     "l_kbd_layout_for_static": "Διάταξη πληκτρολογίου (για στατικό κωδικό πρόσβασης)",

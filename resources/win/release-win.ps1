@@ -20,6 +20,6 @@ $env:SRCDIR = ".\release\"
 & "$env:WIX\bin\light.exe" fragment.wixobj yubioath-desktop.wixobj -ext WixUIExtension -ext WixUtilExtension -o yubico-authenticator-$version-win64.msi
 
 echo "Signing the installer"
-signtool.exe sign /sha1 a1614cd84976030d49209b56162d9efa69b73698 /d "Yubico Authenticator" /fd SHA256 /t http://timestamp.digicert.com/scripts/timstamp.dll yubico-authenticator-$version-win64.msi
+signtool.exe sign /sha1 a1614cd84976030d49209b56162d9efa69b73698 /d "Seedkeeper PRO Manager" /fd SHA256 /t http://timestamp.digicert.com/scripts/timstamp.dll yubico-authenticator-$version-win64.msi
 
 echo "All done"

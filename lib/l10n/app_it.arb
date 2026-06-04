@@ -1,7 +1,7 @@
 {
     "@@locale": "it",
 
-    "app_name": "Yubico Authenticator",
+    "app_name": "Seedkeeper PRO Manager",
     "native_language_name": "Italiano",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -927,8 +927,8 @@
     "l_admin_privileges_required": "Sono richiesti i privilegi di amministratore",
     "p_elevated_permissions_required": "La gestione di questo dispositivo richiede privilegi elevati. In alternativa, è possibile utilizzare le impostazioni di Windows per gestire la configurazione FIDO.",
     "p_webauthn_elevated_permissions_required": "La gestione di WebAuthn richiede privilegi elevati. In alternativa, è possibile utilizzare le impostazioni di Windows per gestire la configurazione FIDO.",
-    "p_ms_store_permission_note": "La versione del Microsoft Store dell'applicazione non è generalmente in grado di elevare i permessi a causa delle limitazioni di sandboxing di Windows. Si consiglia di installare Yubico Authenticator dal nostro programma di installazione ufficiale .msi.",
-    "p_need_camera_permission": "Yubico Authenticator necessita dei permessi della fotocamera per la scansione dei codici QR.",
+    "p_ms_store_permission_note": "La versione del Microsoft Store dell'applicazione non è generalmente in grado di elevare i permessi a causa delle limitazioni di sandboxing di Windows. Si consiglia di installare Seedkeeper PRO Manager dal nostro programma di installazione ufficiale .msi.",
+    "p_need_camera_permission": "Seedkeeper PRO Manager necessita dei permessi della fotocamera per la scansione dei codici QR.",
     "@_qr_codes": {},
 
     "s_qr_scan": "Scansiona il codice QR",
@@ -1050,7 +1050,7 @@
     "l_on_yk_nfc_tap": "Al tocco NFC",
     "l_on_yk_usb_insert": "All'inserimento USB",
     "l_do_nothing": "Non fare nulla",
-    "l_launch_ya": "Avvia Yubico Authenticator",
+    "l_launch_ya": "Avvia Seedkeeper PRO Manager",
     "l_copy_otp_clipboard": "Copia OTP negli appunti",
     "l_launch_and_copy_otp": "Avvia l'applicazione e copia l'OTP",
     "l_kbd_layout_for_static": "Layout della tastiera (per la password statica)",

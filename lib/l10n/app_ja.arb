@@ -1,7 +1,7 @@
 {
     "@@locale": "ja",
 
-    "app_name": "Yubico Authenticator",
+    "app_name": "Seedkeeper PRO Manager",
     "native_language_name": "日本語",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -927,8 +927,8 @@
     "l_admin_privileges_required": "管理者権限が必要です",
     "p_elevated_permissions_required": "このデバイスを管理するには管理者権限が必要です。",
     "p_webauthn_elevated_permissions_required": "WebAuthn の管理には管理者権限が必要です。",
-    "p_ms_store_permission_note": "Microsoft Store 版アプリは、Windows のサンドボックスの制限により権限を昇格できないように制限されています。公式の .msi インストーラーから Yubico Authenticator をインストールすることを推奨します。",
-    "p_need_camera_permission": "QR コードをスキャンするには、Yubico Authenticator にカメラへのアクセスを許可してください。",
+    "p_ms_store_permission_note": "Microsoft Store 版アプリは、Windows のサンドボックスの制限により権限を昇格できないように制限されています。公式の .msi インストーラーから Seedkeeper PRO Manager をインストールすることを推奨します。",
+    "p_need_camera_permission": "QR コードをスキャンするには、Seedkeeper PRO Manager にカメラへのアクセスを許可してください。",
     "@_qr_codes": {},
 
     "s_qr_scan": "QR コードをスキャン",
@@ -1050,7 +1050,7 @@
     "l_on_yk_nfc_tap": "NFC にかざしたとき",
     "l_on_yk_usb_insert": "USB として挿入したとき",
     "l_do_nothing": "何もしない",
-    "l_launch_ya": "Yubico Authenticator を起動",
+    "l_launch_ya": "Seedkeeper PRO Manager を起動",
     "l_copy_otp_clipboard": "OTP をクリップボードにコピー",
     "l_launch_and_copy_otp": "アプリを起動してOTPをコピー",
     "l_kbd_layout_for_static": "キーボードレイアウト (静的パスワード用)",

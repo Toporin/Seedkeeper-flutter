@@ -1,7 +1,7 @@
 {
     "@@locale": "es",
 
-    "app_name": "Yubico Authenticator",
+    "app_name": "Seedkeeper PRO Manager",
     "native_language_name": "Español",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -928,7 +928,7 @@
     "p_elevated_permissions_required": "La administración de este dispositivo requiere privilegios elevados. Como alternativa, puedes usar la configuración de Windows para administrar la configuración de FIDO.",
     "p_webauthn_elevated_permissions_required": "La administración de WebAuthn requiere privilegios elevados. Como alternativa, puedes usar la configuración de Windows para administrar la configuración de FIDO.",
     "p_ms_store_permission_note": null,
-    "p_need_camera_permission": "Yubico Authenticator necesita acceder a la cámara para escanear el código QR. Revise los permisos",
+    "p_need_camera_permission": "Seedkeeper PRO Manager necesita acceder a la cámara para escanear el código QR. Revise los permisos",
     "@_qr_codes": {},
 
     "s_qr_scan": "Escanear código QR",
@@ -1050,7 +1050,7 @@
     "l_on_yk_nfc_tap": null,
     "l_on_yk_usb_insert": null,
     "l_do_nothing": "No hacer nada",
-    "l_launch_ya": "Iniciar Yubico Authenticator",
+    "l_launch_ya": "Iniciar Seedkeeper PRO Manager",
     "l_copy_otp_clipboard": "Copiar OTP al portapapeles",
     "l_launch_and_copy_otp": "Iniciar la aplicación y copiar la OTP",
     "l_kbd_layout_for_static": "Distribución del teclado (para contraseña estática)",

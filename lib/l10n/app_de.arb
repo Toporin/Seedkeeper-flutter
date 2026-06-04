@@ -1,7 +1,7 @@
 {
     "@@locale": "de",
 
-    "app_name": "Yubico Authenticator",
+    "app_name": "Seedkeeper PRO Manager",
     "native_language_name": "Deutsch",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -927,8 +927,8 @@
     "l_admin_privileges_required": "Administrator-Rechte erforderlich",
     "p_elevated_permissions_required": "Die Verwaltung dieses Geräts benötigt erweiterte Berechtigungen. Alternativ kannst Du die Windows Einstellungen zur Verwaltung der FIDO Konfiguration verwenden.",
     "p_webauthn_elevated_permissions_required": "WebAuthn-Verwaltung benötigt erweiterte Berechtigungen.",
-    "p_ms_store_permission_note": "Die Microsoft Store-Version der App kann aufgrund der Sandboxing-Beschränkungen von Windows in der Regel keine höheren Berechtigungen vergeben. Wir empfehlen die Installation von Yubico Authenticator über unser offizielles .msi-Installationsprogramm.",
-    "p_need_camera_permission": "Yubico Authenticator benötigt Zugriff auf die Kamera um QR-Codes aufnehmen zu können.",
+    "p_ms_store_permission_note": "Die Microsoft Store-Version der App kann aufgrund der Sandboxing-Beschränkungen von Windows in der Regel keine höheren Berechtigungen vergeben. Wir empfehlen die Installation von Seedkeeper PRO Manager über unser offizielles .msi-Installationsprogramm.",
+    "p_need_camera_permission": "Seedkeeper PRO Manager benötigt Zugriff auf die Kamera um QR-Codes aufnehmen zu können.",
     "@_qr_codes": {},
 
     "s_qr_scan": "QR-Code aufnehmen",
@@ -1050,7 +1050,7 @@
     "l_on_yk_nfc_tap": "Bei Nutzung über NFC",
     "l_on_yk_usb_insert": "Bei Nutzung über USB",
     "l_do_nothing": "Nichts tun",
-    "l_launch_ya": "Yubico Authenticator starten",
+    "l_launch_ya": "Seedkeeper PRO Manager starten",
     "l_copy_otp_clipboard": "OTP in Zwischenablage kopieren",
     "l_launch_and_copy_otp": "App starten und OTP kopieren",
     "l_kbd_layout_for_static": "Tastaturlayout (für statisches Passwort)",

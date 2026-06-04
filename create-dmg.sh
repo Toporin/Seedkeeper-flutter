@@ -1,10 +1,10 @@
 create-dmg \
---volname "Yubico Authenticator" \
+--volname "Seedkeeper PRO Manager" \
 --background "dmg-background.png" \
 --window-pos 200 120 \
 --window-size 800 400 \
 --icon-size 100 \
---icon "Yubico Authenticator.app" 200 190 \
+--icon "Seedkeeper PRO Manager.app" 200 190 \
 --app-drop-link 600 185 \
 "yubioath-desktop.dmg" \
 "source_folder/"

@@ -84,7 +84,7 @@ jobs:
       run: |
         brew install create-dmg
         mkdir source_folder
-        cp -R build/macos/Build/Products/Release/"Yubico Authenticator.app" source_folder
+        cp -R build/macos/Build/Products/Release/"Seedkeeper PRO Manager.app" source_folder
         cp resources/icons/dmg-background.png .
         sh create-dmg.sh
 
@@ -93,7 +93,7 @@ jobs:
         export REF=$(echo ${GITHUB_REF} | cut -d '/' -f 3)
         mkdir deploy
         mv yubioath-desktop.dmg deploy
-        tar -czf deploy/yubioath-desktop-${REF}.app.tar.gz -C build/macos/Build/Products/Release "Yubico Authenticator.app"
+        tar -czf deploy/yubioath-desktop-${REF}.app.tar.gz -C build/macos/Build/Products/Release "Seedkeeper PRO Manager.app"
         mv create-dmg.sh deploy
         mv resources/icons/dmg-background.png deploy
         mv macos/helper.entitlements deploy

@@ -1,7 +1,7 @@
 {
     "@@locale": "zh",
 
-    "app_name": "Yubico 身份验证器",
+    "app_name": "Seedkeeper PRO Manager",
     "native_language_name": "简体中文",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -927,8 +927,8 @@
     "l_admin_privileges_required": "需要管理员权限",
     "p_elevated_permissions_required": "管理此设备需要管理员权限。或者，您可以使用 Windows 设置来管理 FIDO 配置。",
     "p_webauthn_elevated_permissions_required": "WebAuthn 管理需要管理员权限。或者，您可以使用 Windows 设置来管理 FIDO 配置。",
-    "p_ms_store_permission_note": "由于 Windows 沙盒的限制，微软商店版本的应用程序一般无法提升权限。我们建议使用官方 .msi 安装程序安装 Yubico 身份验证器。",
-    "p_need_camera_permission": "Yubico 身份验证器需要相机权限以扫描二维码。",
+    "p_ms_store_permission_note": "由于 Windows 沙盒的限制，微软商店版本的应用程序一般无法提升权限。我们建议使用官方 .msi 安装程序安装 Seedkeeper PRO Manager。",
+    "p_need_camera_permission": "Seedkeeper PRO Manager需要相机权限以扫描二维码。",
     "@_qr_codes": {},
 
     "s_qr_scan": "扫描二维码",
@@ -1050,7 +1050,7 @@
     "l_on_yk_nfc_tap": "在 NFC 轻触时",
     "l_on_yk_usb_insert": "在 USB 插入时",
     "l_do_nothing": "不进行任何操作",
-    "l_launch_ya": "启动 Yubico 身份验证器",
+    "l_launch_ya": "启动 Seedkeeper PRO Manager",
     "l_copy_otp_clipboard": "复制 OTP（一次性密码） 到剪贴板",
     "l_launch_and_copy_otp": "启动应用程序并复制 OTP （一次性密码）",
     "l_kbd_layout_for_static": "键盘布局（用于静态密码）",

@@ -1,7 +1,7 @@
 {
     "@@locale": "sv",
 
-    "app_name": "Yubico Authenticator",
+    "app_name": "Seedkeeper PRO Manager",
     "native_language_name": "Svenska",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -927,8 +927,8 @@
     "l_admin_privileges_required": "Administratörsbehörighet krävs",
     "p_elevated_permissions_required": "För att hantera den här enheten krävs förhöjda behörigheter. Alternativt kan du använda Windows-inställningar för att hantera FIDO-konfigurationen.",
     "p_webauthn_elevated_permissions_required": "WebAuthn-hantering kräver förhöjda behörigheter. Alternativt kan du använda Windows-inställningar för att hantera FIDO-konfigurationen.",
-    "p_ms_store_permission_note": "Microsoft Store-versionen av appen kan i allmänhet inte höja behörigheterna på grund av begränsningar sandboxning i Windows. Vi rekommenderar att du installerar Yubico Authenticator från vårt officiella .msi installationsprogram.",
-    "p_need_camera_permission": "Yubico Authenticator behöver kamerabehörighet för att skanna QR-koder.",
+    "p_ms_store_permission_note": "Microsoft Store-versionen av appen kan i allmänhet inte höja behörigheterna på grund av begränsningar sandboxning i Windows. Vi rekommenderar att du installerar Seedkeeper PRO Manager från vårt officiella .msi installationsprogram.",
+    "p_need_camera_permission": "Seedkeeper PRO Manager behöver kamerabehörighet för att skanna QR-koder.",
     "@_qr_codes": {},
 
     "s_qr_scan": "Skanna QR-kod",
@@ -1050,7 +1050,7 @@
     "l_on_yk_nfc_tap": "Vid NFC aktivering",
     "l_on_yk_usb_insert": "Vid USB inmatning",
     "l_do_nothing": "Gör ingenting",
-    "l_launch_ya": "Starta Yubico Authenticator",
+    "l_launch_ya": "Starta Seedkeeper PRO Manager",
     "l_copy_otp_clipboard": "Kopiera OTP till urklipp",
     "l_launch_and_copy_otp": "Starta appen och kopiera OTP",
     "l_kbd_layout_for_static": "Tangentbordslayout (för statiskt lösenord)",

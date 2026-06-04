@@ -1,7 +1,7 @@
 {
     "@@locale": "tr",
 
-    "app_name": "Yubico Kimlik Doğrulayıcı",
+    "app_name": "Seedkeeper PRO Manager",
     "native_language_name": "Türkçe",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -927,8 +927,8 @@
     "l_admin_privileges_required": "Yönetici ayrıcalıkları gerekli",
     "p_elevated_permissions_required": "Bu cihazı yönetebilmek için yönetici iznine (yükseltilmiş yetkilere) ihtiyacınız var. Alternatif olarak, FIDO yapılandırmasını yönetmek için Windows Ayarlarını kullanabilirsiniz.",
     "p_webauthn_elevated_permissions_required": "WebAuthn yönetimi için yönetici iznine (yükseltilmiş yetkilere) ihtiyacınız var. Alternatif olarak, FIDO yapılandırmasını yönetmek için Windows Ayarlarını kullanabilirsiniz.",
-    "p_ms_store_permission_note": "Uygulamanın Microsoft Store sürümü, Windows'un sanal alan sınırlamaları nedeniyle genellikle izinleri yükseltemez. Yubico Authenticator'ı resmi .msi yükleyicimizden yüklemenizi öneriyoruz.",
-    "p_need_camera_permission": "Yubico Kimlik Doğrulayıcı, QR kodlarını tarayabilmek için kameraya erişme iznine ihtiyacı var.",
+    "p_ms_store_permission_note": "Uygulamanın Microsoft Store sürümü, Windows'un sanal alan sınırlamaları nedeniyle genellikle izinleri yükseltemez. Seedkeeper PRO Manager'ı resmi .msi yükleyicimizden yüklemenizi öneriyoruz.",
+    "p_need_camera_permission": "Seedkeeper PRO Manager, QR kodlarını tarayabilmek için kameraya erişme iznine ihtiyacı var.",
     "@_qr_codes": {},
 
     "s_qr_scan": "QR kodunu tara",
@@ -1050,7 +1050,7 @@
     "l_on_yk_nfc_tap": "NFC dokunuşunda",
     "l_on_yk_usb_insert": "USB girişinde",
     "l_do_nothing": "Hiçbir şey yapma",
-    "l_launch_ya": "Yubico Kimlik Doğrulayıcısını başlatın",
+    "l_launch_ya": "Seedkeeper PRO Manager başlatın",
     "l_copy_otp_clipboard": "OTP'yi panoya kopyala",
     "l_launch_and_copy_otp": "Uygulamayı başlatın ve OTP'yi kopyalayın",
     "l_kbd_layout_for_static": "Klavye düzeni (statik şifre için)",
