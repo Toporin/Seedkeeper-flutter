@@ -90,6 +90,7 @@ class FingerprintDialog extends ConsumerWidget {
         child: FocusScope(
           autofocus: true,
           child: FsDialog(
+            title: l10n.s_manage,
             child: Column(
               children: [
                 Padding(

@@ -1,7 +1,7 @@
 {
     "@@locale": "zh",
 
-    "app_name": "Seedkeeper PRO Manager",
+    "app_name": "Yubico 身份验证器",
     "native_language_name": "简体中文",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -51,13 +51,17 @@
     "s_nfc": "NFC",
     "s_options": "选项",
     "s_details": "详细信息",
+    "s_required": null,
     "s_show_window": "显示窗口",
     "s_hide_window": "隐藏窗口",
     "s_show_navigation": "显示导航按钮",
     "s_expand_navigation": "展开导航栏",
     "s_collapse_navigation": "折叠导航栏",
     "s_expand_collapse_navigation": "展开/折叠导航栏",
+    "s_expanded": null,
+    "s_collapsed": null,
     "s_show_menu": "显示菜单",
+    "s_menu": null,
     "s_expand_menu_bar": null,
     "s_collapse_menu_bar": null,
     "s_toggle_menu_bar": "切换菜单栏",
@@ -129,6 +133,17 @@
         }
     },
     "s_character_count": "字符数",
+    "l_characters_used": null,
+    "@l_characters_used": {
+        "placeholders": {
+            "used": {
+                "type": "int"
+            },
+            "max": {
+                "type": "int"
+            }
+        }
+    },
     "@_language": {},
 
     "s_language": "语言",
@@ -346,6 +361,7 @@
             }
         }
     },
+    "s_persist_read_only_access": null,
     "s_ep_attestation": "企业认证",
     "s_ep_attestation_enabled": "企业认证已启用",
     "q_enable_ep_attestation": "启用企业认证？",
@@ -490,6 +506,7 @@
     "l_add_account_unlock_required": "需要解锁",
     "l_add_account_func_missing": "功能缺失或禁用",
     "l_account_name_required": "您的帐号必须有一个名称",
+    "l_field_required": null,
     "l_name_already_exists": "发行者名称已存在",
     "l_account_already_exists": "此账户已存在于 Seedkeeper 中",
     "l_invalid_character_issuer": "无效字符：发行人中不允许使用\":\"",
@@ -519,6 +536,7 @@
     "p_warning_disable_credential": "请确保已从注册的服务中禁用此账户，以避免无法登录。",
     "s_account_name": "账户名",
     "s_search_accounts": "搜索账户",
+    "s_clear_search": null,
     "l_accounts_used": "已使用{used} 个账户 ，总共{capacity} 账户可用",
     "@l_accounts_used": {
         "placeholders": {
@@ -546,11 +564,13 @@
             }
         }
     },
-    "s_issuer_optional": "发行者（可选）",
     "s_counter_based": "基于计数器",
     "s_time_based": "基于时间",
     "l_copy_code_desc": "将验证码粘贴到另一个应用程序中",
     "l_calculate_code_desc": "从您的 Seedkeeper 获取新代码",
+    "s_account_type": null,
+    "s_period": null,
+    "s_digits": null,
     "@_fido_credentials": {},
 
     "s_rp_id": "RP ID",
@@ -572,7 +592,7 @@
     "p_warning_delete_passkey_desc": "您将不能使用由此密钥注册的服务。",
     "l_do_not_remove_yk_delete": "删除时不要移除 Seedkeeper",
     "s_search_passkeys": "搜索通行密钥",
-    "p_passkeys_used": "{used} {max} 使用的通行秘钥。",
+    "p_passkeys_used": "{used}/{max} 使用的通行秘钥。",
     "@p_passkeys_used": {
         "placeholders": {
             "used": {
@@ -735,6 +755,7 @@
     "l_key_deleted": "密钥已删除",
     "l_certificate_and_key_deleted": "证书和密钥已删除",
     "l_include_certificate": "包含证书",
+    "s_destination_slot": null,
     "l_select_destination_slot": "选择目标槽位",
     "q_move_key_confirm": "移动 PIV 槽位 {from_slot} 中的私钥？",
     "@q_move_key_confirm": {
@@ -849,6 +870,7 @@
             }
         }
     },
+    "s_keyboard_layout": null,
     "l_keyboard_layout": "键盘 {layout}",
     "@l_keyboard_layout": {
         "placeholders": {
@@ -927,8 +949,8 @@
     "l_admin_privileges_required": "需要管理员权限",
     "p_elevated_permissions_required": "管理此设备需要管理员权限。或者，您可以使用 Windows 设置来管理 FIDO 配置。",
     "p_webauthn_elevated_permissions_required": "WebAuthn 管理需要管理员权限。或者，您可以使用 Windows 设置来管理 FIDO 配置。",
-    "p_ms_store_permission_note": "由于 Windows 沙盒的限制，微软商店版本的应用程序一般无法提升权限。我们建议使用官方 .msi 安装程序安装 Seedkeeper PRO Manager。",
-    "p_need_camera_permission": "Seedkeeper PRO Manager需要相机权限以扫描二维码。",
+    "p_ms_store_permission_note": "由于 Windows 沙盒的限制，微软商店版本的应用程序一般无法提升权限。我们建议使用官方 .msi 安装程序安装 Yubico 身份验证器。",
+    "p_need_camera_permission": "Yubico 身份验证器需要相机权限以扫描二维码。",
     "@_qr_codes": {},
 
     "s_qr_scan": "扫描二维码",
@@ -1050,7 +1072,7 @@
     "l_on_yk_nfc_tap": "在 NFC 轻触时",
     "l_on_yk_usb_insert": "在 USB 插入时",
     "l_do_nothing": "不进行任何操作",
-    "l_launch_ya": "启动 Seedkeeper PRO Manager",
+    "l_launch_ya": "启动 Yubico 身份验证器",
     "l_copy_otp_clipboard": "复制 OTP（一次性密码） 到剪贴板",
     "l_launch_and_copy_otp": "启动应用程序并复制 OTP （一次性密码）",
     "l_kbd_layout_for_static": "键盘布局（用于静态密码）",
@@ -1087,6 +1109,14 @@
 
     "s_set_label": "设置标签",
     "s_set_color": "设置颜色",
+    "s_color_teal": null,
+    "s_color_cyan": null,
+    "s_color_blue": null,
+    "s_color_purple": null,
+    "s_color_red": null,
+    "s_color_orange": null,
+    "s_color_yellow": null,
+    "s_color_green": null,
     "s_change_label": "更改标签",
     "p_set_will_add_custom_name": "这将为你的 Seedkeeper 起一个自定义名称。",
     "p_rename_will_change_custom_name": "这将更改您的 Seedkeeper 的标签。",

@@ -16,6 +16,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'core/state.dart';
+
 const defaultPrimaryColor = Colors.lightGreen;
 
 class AppTheme {
@@ -43,22 +45,57 @@ class AppTheme {
     };
   }
 
+  /// Returns a [WidgetStateProperty] that provides a 1px border in
+  /// [ColorScheme.primary] when focused, aiming to improve visibility
+  /// and contrast.
+  static WidgetStateProperty<BorderSide?> _focusBorderSide(
+    ColorScheme colorScheme,
+  ) => WidgetStateProperty.resolveWith<BorderSide?>((states) {
+    if (states.contains(WidgetState.focused)) {
+      return BorderSide(color: colorScheme.primary, width: 1);
+    }
+    return null;
+  });
+
   static ThemeData _themeData(Brightness brightness, Color primaryColor) {
     final colorScheme = _colorScheme(brightness, primaryColor);
+    final focusBorder = isAndroid ? null : _focusBorderSide(colorScheme);
+    final focusButtonStyle = ButtonStyle(side: focusBorder);
+
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
       fontFamily: 'Roboto',
-      listTileTheme: const ListTileThemeData(
-        // For alignment under menu button
-        contentPadding: EdgeInsets.symmetric(horizontal: 18.0),
-        visualDensity: VisualDensity.compact,
-      ),
+      textButtonTheme: TextButtonThemeData(style: focusButtonStyle),
+      elevatedButtonTheme: ElevatedButtonThemeData(style: focusButtonStyle),
+      outlinedButtonTheme: OutlinedButtonThemeData(style: focusButtonStyle),
+      iconButtonTheme: IconButtonThemeData(style: focusButtonStyle),
+      filledButtonTheme: FilledButtonThemeData(style: focusButtonStyle),
+      menuButtonTheme: MenuButtonThemeData(style: focusButtonStyle),
       chipTheme: ChipThemeData(
         labelStyle: TextStyle(
           fontFamily: 'Roboto',
           color: colorScheme.onSurface,
         ),
+        side: WidgetStateBorderSide.resolveWith((states) {
+          if (!isAndroid && states.contains(WidgetState.focused)) {
+            return BorderSide(color: colorScheme.primary, width: 1.4);
+          }
+          if (states.contains(WidgetState.disabled)) {
+            return BorderSide(
+              color: colorScheme.onSurface.withValues(alpha: 0.12),
+            );
+          }
+          if (states.contains(WidgetState.selected)) {
+            return BorderSide(color: Colors.transparent);
+          }
+          return BorderSide(color: colorScheme.outline, width: 1.4);
+        }),
+      ),
+      listTileTheme: const ListTileThemeData(
+        // For alignment under menu button
+        contentPadding: EdgeInsets.symmetric(horizontal: 18.0),
+        visualDensity: VisualDensity.compact,
       ),
       progressIndicatorTheme: _progressIndicatorThemeData(),
     );

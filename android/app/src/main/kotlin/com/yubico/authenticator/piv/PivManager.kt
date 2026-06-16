@@ -772,6 +772,7 @@ class PivManager(
 
             val result = when (generateType) {
                 "publicKey" -> publicKeyPem
+
                 "csr" -> {
                     val subjectDn =
                         subject ?: throw IllegalArgumentException("Subject missing for csr")

@@ -52,7 +52,10 @@ class SlotDialog extends ConsumerWidget {
     );
 
     if (otpSlot == null) {
-      return const FsDialog(child: CircularProgressIndicator());
+      return FsDialog(
+        title: l10n.s_manage,
+        child: const CircularProgressIndicator(),
+      );
     }
 
     return OtpActions(
@@ -62,6 +65,7 @@ class SlotDialog extends ConsumerWidget {
         child: FocusScope(
           autofocus: true,
           child: FsDialog(
+            title: l10n.s_manage,
             child: Column(
               children: [
                 Padding(

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2025 Yubico.
+ * Copyright (C) 2022-2026 Yubico.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import 'package:material_symbols_icons/symbols.dart';
 import '../app/views/keys.dart';
 import '../core/state.dart';
 import '../generated/l10n/app_localizations.dart';
+import 'ensure_focus_visible.dart';
 
 class ResponsiveDialog extends StatefulWidget {
   final Widget? title;
@@ -64,28 +65,93 @@ class _ResponsiveDialogState extends State<ResponsiveDialog> {
         : l10n.s_cancel;
   }
 
-  Widget _buildFullscreen(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: widget.title,
-      actions: widget.actions,
-      leading: IconButton(
-        key: closeButton,
-        tooltip: _getCancelText(context),
-        icon: const Icon(Symbols.close),
-        onPressed: widget.allowCancel
-            ? () {
-                widget.onCancel?.call();
-                Navigator.of(context).pop();
-              }
-            : null,
+  String? _extractTitleText() {
+    final title = widget.title;
+    if (title is Text) {
+      return title.data;
+    }
+    return null;
+  }
+
+  Widget _buildFullscreen(BuildContext context) => Semantics(
+    scopesRoute: true,
+    namesRoute: true,
+    explicitChildNodes: true,
+    label: _extractTitleText(),
+    child: Scaffold(
+      appBar: AppBar(
+        title: widget.title,
+        actions: widget.actions,
+        leading: IconButton(
+          key: closeButton,
+          tooltip: _getCancelText(context),
+          icon: const Icon(Symbols.close),
+          onPressed: widget.allowCancel
+              ? () {
+                  widget.onCancel?.call();
+                  Navigator.of(context).pop();
+                }
+              : null,
+        ),
       ),
-    ),
-    body: SingleChildScrollView(
-      child: SafeArea(
-        child: Container(key: _childKey, child: widget.builder(context, true)),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: EnsureFocusVisible(
+            child: Container(
+              key: _childKey,
+              child: widget.builder(context, true),
+            ),
+          ),
+        ),
       ),
     ),
   );
+
+  Widget _buildCompactDialog(BuildContext context) {
+    return PopScope(
+      canPop: widget.allowCancel,
+      child: Dialog.fullscreen(
+        child: Semantics(
+          scopesRoute: true,
+          namesRoute: true,
+          explicitChildNodes: true,
+          label: _extractTitleText(),
+          child: SafeArea(
+            child: Scaffold(
+              appBar: AppBar(
+                title: widget.title,
+                actions: widget.actions,
+                leading: IconButton(
+                  key: closeButton,
+                  tooltip: _getCancelText(context),
+                  icon: const Icon(Symbols.close),
+                  onPressed: widget.allowCancel
+                      ? () {
+                          widget.onCancel?.call();
+                          Navigator.of(context).pop();
+                        }
+                      : null,
+                ),
+              ),
+              body: SingleChildScrollView(
+                child: EnsureFocusVisible(
+                  child: Container(
+                    key: _childKey,
+                    child: widget.builder(context, true),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) {
+          widget.onCancel?.call();
+        }
+      },
+    );
+  }
 
   Widget _buildDialog(BuildContext context) {
     return PopScope(
@@ -99,6 +165,7 @@ class _ResponsiveDialogState extends State<ResponsiveDialog> {
           ),
         ),
         child: AlertDialog(
+          semanticLabel: _extractTitleText(),
           title: widget.title,
           titlePadding: const EdgeInsets.only(top: 24, left: 18, right: 18),
           contentPadding: const EdgeInsets.symmetric(vertical: 8),
@@ -107,7 +174,9 @@ class _ResponsiveDialogState extends State<ResponsiveDialog> {
             child: Container(
               key: _childKey,
               child: SingleChildScrollView(
-                child: widget.builder(context, false),
+                child: EnsureFocusVisible(
+                  child: widget.builder(context, false),
+                ),
               ),
             ),
           ),
@@ -148,9 +217,20 @@ class _ResponsiveDialogState extends State<ResponsiveDialog> {
             _hasLostFocus = true;
           }
         },
-        child: constraints.maxWidth < maxWidth
-            ? _buildFullscreen(context)
-            : _buildDialog(context),
+        child: () {
+          if (constraints.maxWidth < maxWidth) {
+            return _buildFullscreen(context);
+          }
+          // On Android in landscape, use compact layout so forms
+          // remain usable when the software keyboard appears.
+          if (isAndroid) {
+            final orientation = MediaQuery.of(context).orientation;
+            if (orientation == Orientation.landscape) {
+              return _buildCompactDialog(context);
+            }
+          }
+          return _buildDialog(context);
+        }(),
       );
     }),
   );

@@ -18,11 +18,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/state.dart';
+import '../../widgets/focus_border.dart';
 import '../../widgets/list_title.dart';
 import '../../widgets/tooltip_if_truncated.dart';
 import '../models.dart';
 
-class ActionListItem extends StatelessWidget {
+class ActionListItem extends StatefulWidget {
   final Widget icon;
   final String title;
   final String? subtitle;
@@ -31,6 +32,7 @@ class ActionListItem extends StatelessWidget {
   final ActionStyle actionStyle;
   final Feature? feature;
   final double? borderRadius;
+  final TextStyle? titleStyle;
 
   const ActionListItem({
     super.key,
@@ -42,56 +44,71 @@ class ActionListItem extends StatelessWidget {
     this.actionStyle = ActionStyle.normal,
     this.feature,
     this.borderRadius,
+    this.titleStyle,
   });
 
   @override
-  Widget build(BuildContext context) {
-    // final theme =
-    //     ButtonTheme.of(context).colorScheme ?? Theme.of(context).colorScheme;
+  State<ActionListItem> createState() => _ActionListItemState();
+}
 
-    // final (foreground, background) = switch (actionStyle) {
-    //   ActionStyle.normal => (theme.onSecondary, theme.secondary),
-    //   ActionStyle.primary => (theme.onPrimary, theme.primary),
-    //   ActionStyle.error => (theme.onError, theme.error),
-    // };
+class _ActionListItemState extends State<ActionListItem> {
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final borderRadius = BorderRadius.circular(widget.borderRadius ?? 48);
 
     return GestureDetector(
-      onTap: onTap == null
+      onTap: widget.onTap == null
           ? () {
               // Needed to avoid triggering escape intent when tapping
               // on a disabled item
             }
           : null,
-      child: ListTile(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? 48),
-        ),
-        title: TooltipIfTruncated(
-          text: title,
-          style: TextStyle(fontSize: theme.textTheme.bodyLarge!.fontSize),
-        ),
-        subtitle: subtitle != null
-            ? TooltipIfTruncated(
-                text: subtitle!,
-                style: TextStyle(
-                  fontSize: theme.textTheme.bodyMedium!.fontSize,
-                ),
-                maxLines: 2,
-                overflow: .ellipsis,
-              )
-            : null,
-        leading: Opacity(
-          opacity: onTap != null ? 1.0 : 0.4,
-          child: CircleAvatar(
-            foregroundColor: theme.colorScheme.onSurfaceVariant,
-            backgroundColor: Colors.transparent,
-            child: icon,
+      child: FocusBorder(
+        focusNode: _focusNode,
+        borderRadius: borderRadius,
+        child: ListTile(
+          focusNode: _focusNode,
+          shape: RoundedRectangleBorder(borderRadius: borderRadius),
+          title: TooltipIfTruncated(
+            text: widget.title,
+            style: TextStyle(
+              fontSize: theme.textTheme.bodyLarge!.fontSize,
+            ).merge(widget.titleStyle),
           ),
+          subtitle: widget.subtitle != null
+              ? TooltipIfTruncated(
+                  text: widget.subtitle!,
+                  style: TextStyle(
+                    fontSize: theme.textTheme.bodyMedium!.fontSize,
+                  ),
+                  maxLines: 2,
+                  overflow: .ellipsis,
+                )
+              : null,
+          leading: Opacity(
+            opacity: widget.onTap != null ? 1.0 : 0.4,
+            child: CircleAvatar(
+              foregroundColor: colorScheme.onSurfaceVariant,
+              backgroundColor: Colors.transparent,
+              child: widget.icon,
+            ),
+          ),
+          trailing: widget.trailing,
+          onTap: widget.onTap != null
+              ? () => widget.onTap?.call(context)
+              : null,
+          enabled: widget.onTap != null,
         ),
-        trailing: trailing,
-        onTap: onTap != null ? () => onTap?.call(context) : null,
-        enabled: onTap != null,
       ),
     );
   }

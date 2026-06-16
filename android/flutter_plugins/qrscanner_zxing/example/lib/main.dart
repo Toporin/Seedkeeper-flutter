@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 Yubico.
+ * Copyright (C) 2022-2026 Yubico.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -128,7 +128,7 @@ class QRScannerPageState extends State<QRScannerPage> {
             left: 0,
             right: 0,
             child: QRScannerZxingView(
-              marginPct: 10,
+              overlaySizeFraction: 0.65,
               onViewInitialized: (permissionsGranted) {
                 // this example does not handle Camera permissions
               },

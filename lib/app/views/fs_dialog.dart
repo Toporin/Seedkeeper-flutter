@@ -23,32 +23,37 @@ import 'keys.dart' as keys;
 
 class FsDialog extends StatelessWidget {
   final Widget child;
-  const FsDialog({required this.child, super.key});
+  final String title;
+  const FsDialog({required this.child, required this.title, super.key});
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return Dialog.fullscreen(
-      backgroundColor: Theme.of(
-        context,
-      ).colorScheme.surface.withValues(alpha: 0.7),
-      child: SafeArea(
-        child: Column(
-          mainAxisAlignment: .spaceBetween,
-          children: [
-            Flexible(child: SingleChildScrollView(child: child)),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: TextButton.icon(
-                key: keys.closeButton,
-                icon: const Icon(Symbols.close),
-                label: Text(l10n.s_close),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+    return Semantics(
+      namesRoute: true,
+      label: title,
+      child: Dialog.fullscreen(
+        backgroundColor: Theme.of(
+          context,
+        ).colorScheme.surface.withValues(alpha: 0.7),
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: .spaceBetween,
+            children: [
+              Flexible(child: SingleChildScrollView(child: child)),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: TextButton.icon(
+                  key: keys.closeButton,
+                  icon: const Icon(Symbols.close),
+                  label: Text(l10n.s_close),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022-2023 Yubico.
+ * Copyright (C) 2022-2026 Yubico.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,156 +14,127 @@
  * limitations under the License.
  */
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 import 'qr_scanner_scan_status.dart';
 
-class QRScannerOverlay extends StatelessWidget {
-  final ScanStatus status;
-  final Size screenSize;
-  final GlobalKey overlayWidgetKey;
+const double _kBorderRadius = 24.0;
+const double _kBorderWidth = 8.0;
 
-  const QRScannerOverlay({
-    super.key,
-    required this.status,
-    required this.screenSize,
-    required this.overlayWidgetKey,
-  });
+/// Paints a solid background with a rounded-rect hole punched out.
+class QRScannerCutoutBackground extends StatelessWidget {
+  final Color backgroundColor;
 
-  RRect getOverlayRRect(Size size) {
-    final renderBox =
-        overlayWidgetKey.currentContext?.findRenderObject() as RenderBox;
-    final renderObjectSize = renderBox.size;
-    final renderObjectOffset = renderBox.globalToLocal(Offset.zero);
-
-    final double shorterEdge = min(
-      renderObjectSize.width,
-      renderObjectSize.height,
-    );
-
-    var top = (size.height - shorterEdge) / 2 - 32;
-
-    if (top + renderObjectOffset.dy < 0) {
-      top = -renderObjectOffset.dy;
-    }
-
-    return RRect.fromRectAndRadius(
-      Rect.fromLTWH(
-        (size.width - shorterEdge) / 2,
-        top,
-        shorterEdge,
-        shorterEdge,
-      ),
-      const Radius.circular(10),
-    );
-  }
+  const QRScannerCutoutBackground({super.key, required this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
-    overlayRectProvider(Size size) {
-      return getOverlayRRect(size);
-    }
-
-    return Stack(
-      fit: .expand,
-      children: [
-        /// clip scanner area "hole" into a darkened background
-        ClipPath(
-          clipper: _OverlayClipper(overlayRectProvider),
-          child: const Opacity(
-            opacity: 0.6,
-            child: ColoredBox(
-              color: Colors.black,
-              child: Column(
-                mainAxisSize: .max,
-                mainAxisAlignment: .center,
-                crossAxisAlignment: .stretch,
-                children: [Spacer()],
-              ),
-            ),
-          ),
-        ),
-
-        /// draw a stroke around the scanner area
-        CustomPaint(painter: _OverlayPainter(status, overlayRectProvider)),
-      ],
+    return CustomPaint(
+      painter: _CutoutBackgroundPainter(backgroundColor),
+      child: const SizedBox.expand(),
     );
   }
 }
 
-/// Paints a colored stroke and status icon.
-/// The stroke area is acquired through passed in rectangle provider.
-/// The color is computed from the scan status.
-class _OverlayPainter extends CustomPainter {
-  final ScanStatus _status;
-  final Function(Size) _rectProvider;
+class _CutoutBackgroundPainter extends CustomPainter {
+  final Color _backgroundColor;
 
-  _OverlayPainter(this._status, this._rectProvider) : super();
+  _CutoutBackgroundPainter(this._backgroundColor);
 
   @override
   void paint(Canvas canvas, Size size) {
-    final color = _status == ScanStatus.error
-        ? Colors.red.shade400
-        : Colors.green.shade400;
-    Paint paint = Paint()
-      ..color = color
-      ..style = .stroke
-      ..strokeWidth = 3.0;
+    const inset = _kBorderWidth / 2;
+    final holeRect = Rect.fromLTWH(
+      inset,
+      inset,
+      size.width - inset * 2,
+      size.height - inset * 2,
+    );
 
-    final RRect overlayRRect = _rectProvider(size);
-
-    Path path = Path()..addRRect(overlayRRect);
-    canvas.drawPath(path, paint);
-
-    if (_status == ScanStatus.success) {
-      const icon = Symbols.check_circle;
-      final iconSize = overlayRRect.width < 150
-          ? overlayRRect.width - 5.0
-          : 150.0;
-      TextPainter iconPainter = TextPainter(
-        textDirection: .rtl,
-        textAlign: .center,
-      );
-      iconPainter.text = TextSpan(
-        text: String.fromCharCode(icon.codePoint),
-        style: TextStyle(
-          fontSize: iconSize,
-          fontFamily: icon.fontFamily,
-          fontVariations: const [FontVariation('FILL', 1)],
-          package: icon.fontPackage,
-          color: color.withAlpha(240),
+    // Extend outer rect beyond widget bounds to ensure no camera pixels
+    // leak through at edges due to sub-pixel rendering.
+    final path = Path()
+      ..addRect(Rect.fromLTWH(-2, -2, size.width + 4, size.height + 4))
+      ..addRRect(
+        RRect.fromRectAndRadius(
+          holeRect,
+          const Radius.circular(_kBorderRadius - inset),
         ),
-      );
-      iconPainter.layout();
-      iconPainter.paint(
-        canvas,
-        overlayRRect.center.translate(-iconSize / 2, -iconSize / 2),
-      );
-    }
+      )
+      ..fillType = PathFillType.evenOdd;
+
+    canvas.drawPath(path, Paint()..color = _backgroundColor);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant _CutoutBackgroundPainter oldDelegate) =>
+      oldDelegate._backgroundColor != _backgroundColor;
 }
 
-/// Clips a hole into the background.
-/// The clipped area is acquired through passed in rectangle provider.
-class _OverlayClipper extends CustomClipper<Path> {
-  final Function(Size) _rectProvider;
+/// Paints a rounded-rect border stroke and optional success/error indicator.
+class QRScannerBorder extends StatelessWidget {
+  final ScanStatus status;
+  final Color primaryColor;
 
-  _OverlayClipper(this._rectProvider);
+  const QRScannerBorder({
+    super.key,
+    required this.status,
+    required this.primaryColor,
+  });
 
   @override
-  Path getClip(Size size) {
-    return Path()
-      ..addRect(Rect.fromLTWH(0, 0, size.width, size.height))
-      ..addRRect(_rectProvider(size))
-      ..fillType = .evenOdd;
+  Widget build(BuildContext context) {
+    final color = switch (status) {
+      ScanStatus.error => Colors.red.shade400,
+      ScanStatus.success => Colors.green.shade400,
+      ScanStatus.scanning => primaryColor,
+    };
+
+    return CustomPaint(
+      painter: _BorderPainter(color),
+      child: status == ScanStatus.success
+          ? Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: color.withAlpha(240),
+                  shape: BoxShape.circle,
+                ),
+                padding: const EdgeInsets.all(16),
+                child: const Icon(Symbols.check, color: Colors.white, size: 64),
+              ),
+            )
+          : const SizedBox.expand(),
+    );
+  }
+}
+
+class _BorderPainter extends CustomPainter {
+  final Color _color;
+
+  _BorderPainter(this._color);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    const inset = _kBorderWidth / 2;
+    final paint = Paint()
+      ..color = _color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = _kBorderWidth;
+
+    final rrect = RRect.fromRectAndRadius(
+      Rect.fromLTWH(
+        inset,
+        inset,
+        size.width - inset * 2,
+        size.height - inset * 2,
+      ),
+      const Radius.circular(_kBorderRadius - inset),
+    );
+    canvas.drawRRect(rrect, paint);
   }
 
   @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
+  bool shouldRepaint(covariant _BorderPainter oldDelegate) =>
+      oldDelegate._color != _color;
 }

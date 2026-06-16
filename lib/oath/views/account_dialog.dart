@@ -115,6 +115,7 @@ class AccountDialog extends ConsumerWidget {
           child: FocusScope(
             autofocus: true,
             child: FsDialog(
+              title: AppLocalizations.of(context).s_manage,
               child: Column(
                 children: [
                   Padding(

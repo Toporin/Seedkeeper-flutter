@@ -1,3 +1,13 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.21")
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -6,23 +16,32 @@ allprojects {
 
     project.ext {
         minSdkVersion = 24
-        targetSdkVersion = 36
-        compileSdkVersion = 36
+        targetSdkVersion = 37
+        compileSdkVersion = 37
 
-        yubiKitVersion = "3.0.1"
+        yubiKitVersion = "3.1.0"
         junitVersion = "4.13.2"
-        mockitoVersion = "5.21.0"
+        mockitoVersion = "5.23.0"
     }
 }
 
-rootProject.buildDir = '../build'
+rootProject.layout.buildDirectory = '../build'
 subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
+    project.layout.buildDirectory = "${rootProject.layout.buildDirectory.get()}/${project.name}"
 }
 subprojects {
     project.evaluationDependsOn(':app')
 }
 
+// Disable unit tests for Flutter plugins (not owned by this project)
+subprojects {
+    if (project.name != 'app') {
+        tasks.withType(Test).configureEach {
+            enabled = false
+        }
+    }
+}
+
 tasks.register("clean", Delete) {
-    delete rootProject.buildDir
+    delete rootProject.layout.buildDirectory
 }

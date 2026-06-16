@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
 	xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
-  <?define ProductVersion="7.3.3" ?>
+  <?define ProductVersion="7.4.1" ?>
   <?define ProductName="Seedkeeper PRO Manager" ?>
 
    <Product Id="*" UpgradeCode="fcbafc57-aaaa-47b8-b861-20bda48cd4f6" Name="$(var.ProductName)" Version="$(var.ProductVersion)" Manufacturer="Yubico AB" Language="1033">
@@ -67,7 +67,7 @@
                   Target="[!fil793E9EB8753E3C01B3E26C3ADCE0FBB4]"
                   WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
           <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
-          <RegistryValue Root="HKCU" Key="Software\Yubico\Yubico Authenticator" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+          <RegistryValue Root="HKCU" Key="Software\Yubico\Seedkeeper PRO Manager" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
           <util:RemoveFolderEx Id="Remove" On="install" Property="INSTALLDIR" />
         </Component>
       </DirectoryRef>

@@ -25,6 +25,7 @@ import '../../core/models.dart';
 import '../../core/state.dart';
 import '../../generated/l10n/app_localizations.dart';
 import '../../management/models.dart';
+import '../../widgets/focus_border.dart';
 import '../models.dart';
 import '../state.dart';
 import 'device_avatar.dart';
@@ -231,7 +232,14 @@ class DeviceRow extends ConsumerStatefulWidget {
 }
 
 class _DeviceRowState extends ConsumerState<DeviceRow> {
+  final FocusNode _focusNode = FocusNode();
   bool _showContextMenu = false;
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -258,6 +266,7 @@ class _DeviceRowState extends ConsumerState<DeviceRow> {
           )
         : themeData;
     if (widget.extended) {
+      final borderRadius = widget.borderRadius ?? BorderRadius.circular(48);
       return Tooltip(
         message: '', // no tooltip for drawer
         child: Theme(
@@ -273,30 +282,40 @@ class _DeviceRowState extends ConsumerState<DeviceRow> {
                 _showContextMenu = false;
               });
             },
-            child: ListTile(
-              shape: RoundedRectangleBorder(
-                borderRadius: widget.borderRadius ?? BorderRadius.circular(48),
+            child: FocusBorder(
+              focusNode: _focusNode,
+              borderRadius: borderRadius,
+              color: widget.selected
+                  ? colorScheme.onPrimary
+                  : themeData.colorScheme.primary,
+              child: ListTile(
+                focusNode: _focusNode,
+                shape: RoundedRectangleBorder(borderRadius: borderRadius),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 0,
+                ),
+                horizontalTitleGap: 8,
+                leading: widget.leading,
+                trailing: menuItems.isNotEmpty
+                    ? _DeviceMenuButton(
+                        menuItems: menuItems,
+                        opacity: widget.selected
+                            ? 1.0
+                            : _showContextMenu
+                            ? 0.3
+                            : 0.0,
+                      )
+                    : null,
+                title: Text(widget.title, overflow: .fade, softWrap: false),
+                subtitle: Text(
+                  widget.subtitle,
+                  overflow: .fade,
+                  softWrap: false,
+                ),
+                dense: true,
+                onTap: widget.onTap,
               ),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 8,
-                vertical: 0,
-              ),
-              horizontalTitleGap: 8,
-              leading: widget.leading,
-              trailing: menuItems.isNotEmpty
-                  ? _DeviceMenuButton(
-                      menuItems: menuItems,
-                      opacity: widget.selected
-                          ? 1.0
-                          : _showContextMenu
-                          ? 0.3
-                          : 0.0,
-                    )
-                  : null,
-              title: Text(widget.title, overflow: .fade, softWrap: false),
-              subtitle: Text(widget.subtitle, overflow: .fade, softWrap: false),
-              dense: true,
-              onTap: widget.onTap,
             ),
           ),
         ),

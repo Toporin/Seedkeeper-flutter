@@ -1,15 +1,17 @@
-group 'com.yubico.authenticator.flutter_plugins.qrscanner_zxing'
-version '1.0'
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+group = 'com.yubico.authenticator.flutter_plugins.qrscanner_zxing'
+version = '1.0'
 
 buildscript {
-    ext.kotlin_version = '2.2.21'
+    ext.kotlin_version = '2.3.21'
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.13.2'
+        classpath 'com.android.tools.build:gradle:9.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -26,26 +28,29 @@ apply plugin: 'kotlin-android'
 
 android {
 
-    namespace 'com.yubico.authenticator.flutter_plugins.qrscanner_zxing'
+    namespace = 'com.yubico.authenticator.flutter_plugins.qrscanner_zxing'
 
-    compileSdkVersion 36
+    compileSdk = 37
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
 
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main.kotlin.srcDirs += 'src/main/kotlin'
     }
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 36
+        minSdk = 21
+        targetSdk = 37
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_11
     }
 }
 
@@ -54,7 +59,8 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:${camerax_version}"
     implementation "androidx.camera:camera-view:${camerax_version}"
     implementation "androidx.camera:camera-camera2:${camerax_version}"
-    
+
     implementation "com.google.zxing:core:3.5.4"
     implementation "com.google.zxing:android-core:3.3.0"
 }
+

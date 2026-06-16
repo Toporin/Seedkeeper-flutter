@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -29,25 +31,22 @@ android {
 
     namespace = 'com.yubico.authenticator'
 
-    compileSdkVersion project.compileSdkVersion
+    compileSdk = project.compileSdkVersion
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
 
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main.kotlin.srcDirs += 'src/main/kotlin'
     }
 
     defaultConfig {
         applicationId "com.yubico.yubioath"
-        minSdkVersion project.minSdkVersion
-        targetSdkVersion project.targetSdkVersion
+        minSdk = project.minSdkVersion
+        targetSdk = project.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -71,25 +70,33 @@ android {
         abortOnError = false
     }
 
-    applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def abiCodes = ['armeabi-v7a': 1, 'arm64-v8a': 2, x86: 3, x86_64: 4]
-            def abiCode = abiCodes.get(output.getFilter(com.android.build.OutputFile.ABI))
-            output.versionCodeOverride = variant.versionCode * 10 + (abiCode != null ? abiCode : 0)
+    packaging {
+        resources {
+            excludes += 'META-INF/versions/9/OSGI-INF/MANIFEST.MF'
+            excludes += 'META-INF/versions/9/OSGI-INF/bcprov.provider.bc.Licenses'
+            excludes += 'META-INF/versions/9/OSGI-INF/bcpkix.provider.bc.Licenses'
         }
-    }
-
-    packagingOptions {
-        exclude 'META-INF/versions/9/OSGI-INF/MANIFEST.MF'
-        exclude 'META-INF/versions/9/OSGI-INF/bcprov.provider.bc.Licenses'
-        exclude 'META-INF/versions/9/OSGI-INF/bcpkix.provider.bc.Licenses'
     }
 
     ndkVersion = flutter.ndkVersion
 }
 
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_11
+    }
+}
+
 apply from: "signing.gradle"
 apply from: "collect_licenses.gradle"
+
+android.applicationVariants.all { variant ->
+    variant.outputs.each { output ->
+        def abiCodes = ['armeabi-v7a': 1, 'arm64-v8a': 2, x86: 3, x86_64: 4]
+        def abiCode = abiCodes.get(output.getFilter(com.android.build.OutputFile.ABI))
+        output.versionCodeOverride = variant.versionCode * 10 + (abiCode != null ? abiCode : 0)
+    }
+}
 
 flutter {
     source = '../..'
@@ -118,21 +125,21 @@ dependencies {
     api "com.yubico.yubikit:piv:$project.yubiKitVersion"
     api "com.yubico.yubikit:support:$project.yubiKitVersion"
 
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.10.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0'
 
     // Lifecycle
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0'
 
-    implementation "androidx.core:core-ktx:1.17.0"
+    implementation "androidx.core:core-ktx:1.18.0"
     implementation 'androidx.fragment:fragment-ktx:1.8.9'
     implementation 'androidx.preference:preference-ktx:1.2.1'
 
-    implementation 'com.google.android.material:material:1.13.0'
+    implementation 'com.google.android.material:material:1.14.0'
 
     implementation 'com.github.tony19:logback-android:3.0.0'
 
-    implementation 'org.bouncycastle:bcprov-jdk18on:1.83'
-    implementation 'org.bouncycastle:bcpkix-jdk18on:1.83'
+    implementation 'org.bouncycastle:bcprov-jdk18on:1.84'
+    implementation 'org.bouncycastle:bcpkix-jdk18on:1.84'
 
     // testing dependencies
     testImplementation "junit:junit:$project.junitVersion"

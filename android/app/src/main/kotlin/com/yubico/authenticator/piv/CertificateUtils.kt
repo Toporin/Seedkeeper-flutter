@@ -67,13 +67,17 @@ enum class KeyAlgorithm {
         fun fromPublicKey(publicKey: PublicKey): KeyAlgorithm =
             when (publicKey.algorithm.uppercase()) {
                 "RSA" -> RSA
+
                 "EC" -> EC
+
                 // Android/JCA may report Ed25519 as "Ed25519" or "EdDSA"
                 "ED25519", "EDDSA" -> ED25519
+
                 // X25519 ("XDH", "X25519") is key agreement only and cannot sign
                 "X25519", "XDH" -> throw UnsupportedOperationException(
                     "X25519/XDH cannot be used for signing (CSR/cert)."
                 )
+
                 else -> {
                     // Try to detect by encoded OID if the algorithm string is unexpected.
                     val alg = tryDetectFromEncoded(publicKey)
@@ -99,9 +103,11 @@ enum class KeyAlgorithm {
             when {
                 kfRSA != null &&
                     runCatching { kfRSA.generatePublic(spec) as RSAPublicKey }.isSuccess -> RSA
+
                 kfEC != null && runCatching {
                     kfEC.generatePublic(spec) as ECPublicKey
                 }.isSuccess -> EC
+
                 else -> null
             }
         } catch (_: Exception) {

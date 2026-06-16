@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2022 Yubico.
+ * Copyright (C) 2022-2026 Yubico.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 class QRScannerZxingView extends StatefulWidget {
-  final int marginPct;
+  final double overlaySizeFraction;
 
   /// Called when a code has been detected.
   final Function(String rawData) onDetect;
@@ -39,7 +39,7 @@ class QRScannerZxingView extends StatefulWidget {
 
   const QRScannerZxingView({
     super.key,
-    required this.marginPct,
+    required this.overlaySizeFraction,
     required this.onDetect,
     this.beforePermissionsRequest,
     required this.onViewInitialized,
@@ -85,6 +85,11 @@ class QRScannerZxingViewState extends State<QRScannerZxingView> {
     channel.invokeMethod("requestCameraPermissions", null);
   }
 
+  void recheckPermissions() {
+    debugPrint("Rechecking camera permissions");
+    channel.invokeMethod("recheckPermissions", null);
+  }
+
   void resumeScanning() async {
     debugPrint("Resuming QR code scanning");
     await channel.invokeMethod("resumeScanning", null);
@@ -99,34 +104,41 @@ class QRScannerZxingViewState extends State<QRScannerZxingView> {
   @override
   Widget build(BuildContext context) {
     const String viewType = 'qrScannerNativeView';
-    Map<String, dynamic> creationParams = <String, dynamic>{
-      "margin": widget.marginPct,
-    };
-    return PlatformViewLink(
-      viewType: viewType,
-      surfaceFactory: (
-        BuildContext context,
-        PlatformViewController controller,
-      ) {
-        return AndroidViewSurface(
-          controller: controller as AndroidViewController,
-          gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
-          hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        Map<String, dynamic> creationParams = <String, dynamic>{
+          "overlaySizeFraction": widget.overlaySizeFraction,
+          "viewWidth": constraints.maxWidth,
+          "viewHeight": constraints.maxHeight,
+        };
+        return PlatformViewLink(
+          viewType: viewType,
+          surfaceFactory: (
+            BuildContext context,
+            PlatformViewController controller,
+          ) {
+            return AndroidViewSurface(
+              controller: controller as AndroidViewController,
+              gestureRecognizers:
+                  const <Factory<OneSequenceGestureRecognizer>>{},
+              hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+            );
+          },
+          onCreatePlatformView: (PlatformViewCreationParams params) {
+            return PlatformViewsService.initExpensiveAndroidView(
+                id: params.id,
+                viewType: viewType,
+                layoutDirection: TextDirection.ltr,
+                creationParams: creationParams,
+                creationParamsCodec: const StandardMessageCodec(),
+                onFocus: () {
+                  params.onFocusChanged(true);
+                },
+              )
+              ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
+              ..create();
+          },
         );
-      },
-      onCreatePlatformView: (PlatformViewCreationParams params) {
-        return PlatformViewsService.initExpensiveAndroidView(
-            id: params.id,
-            viewType: viewType,
-            layoutDirection: TextDirection.ltr,
-            creationParams: creationParams,
-            creationParamsCodec: const StandardMessageCodec(),
-            onFocus: () {
-              params.onFocusChanged(true);
-            },
-          )
-          ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)
-          ..create();
       },
     );
   }

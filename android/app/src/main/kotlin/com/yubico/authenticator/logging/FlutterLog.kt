@@ -49,6 +49,7 @@ class FlutterLog(messenger: BinaryMessenger) {
                         result.error("-1", "Invalid log parameters", null)
                     }
                 }
+
                 "setLevel" -> {
                     val levelArgValue = call.argument<String>("level")
                     val requestedLogLevel = logLevelFromArgument(levelArgValue)
@@ -59,9 +60,11 @@ class FlutterLog(messenger: BinaryMessenger) {
                     }
                     result.success(null)
                 }
+
                 "getLogs" -> {
                     result.success(bufferAppender.getLogBuffer())
                 }
+
                 else -> {
                     result.notImplemented()
                 }

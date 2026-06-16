@@ -8,7 +8,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
     - name: Read variables from repo
       run: |
@@ -22,23 +22,23 @@ jobs:
         git diff --exit-code
 
     - name: Set up Python
-      uses: actions/setup-python@v6
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
       with:
         python-version: ${{ env.PYVER }}
 
     - name: Set up CocoaPods
-      uses: maxim-lobanov/setup-cocoapods@v1
+      uses: maxim-lobanov/setup-cocoapods@8e97e1e98e6ccf42564fdf5622c8feec74199377 # v1.4.0
       with:
         podfile-path: macos/Podfile.lock
 
     - name: Install uv
-      uses: astral-sh/setup-uv@v7
+      uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
       with:
         enable-cache: true
 
     - name: Cache helper
       id: cache-helper
-      uses: actions/cache@v5
+      uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
       with:
         path: |
           build/macos/helper
@@ -56,7 +56,7 @@ jobs:
       if: steps.cache-helper.outputs.cache-hit != 'true'
       run: ./build-helper.sh
 
-    - uses: subosito/flutter-action@v2
+    - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2.23.0
       with:
         channel: 'stable'
         flutter-version: ${{ env.FLUTTER }}
@@ -102,7 +102,7 @@ jobs:
         mv macos/release-macos.sh deploy
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         name: yubioath-desktop-macos
         path: deploy
