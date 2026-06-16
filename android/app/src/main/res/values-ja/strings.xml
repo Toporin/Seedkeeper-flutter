@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="p_ndef_set_otp">OTP コードを YubiKey からクリップボードにコピーしました。</string>
-    <string name="p_ndef_set_password">パスワードを YubiKey からクリップボードにコピーしました。</string>
-    <string name="p_ndef_parse_failure">YubiKey から OTP コードを解析できませんでした。</string>
-    <string name="p_ndef_set_clip_failure">OTP コードを YubiKey からコピーしようと試みましたが、クリップボードにアクセスできませんでした。</string>
+    <string name="p_ndef_set_otp">OTP コードを Seedkeeper からクリップボードにコピーしました。</string>
+    <string name="p_ndef_set_password">パスワードを Seedkeeper からクリップボードにコピーしました。</string>
+    <string name="p_ndef_parse_failure">Seedkeeper から OTP コードを解析できませんでした。</string>
+    <string name="p_ndef_set_clip_failure">OTP コードを Seedkeeper からコピーしようと試みましたが、クリップボードにアクセスできませんでした。</string>
 </resources>
