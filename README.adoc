@@ -1,5 +1,7 @@
 == Seedkeeper PRO Manager for Desktop and Android
 
+NOTE: This is a community fork of Yubico's https://github.com/Yubico/yubioath-flutter[Yubioath-Flutter application], adapted to manage Seedkeeper PRO devices instead of YubiKeys.
+
 image:splash.png[]
 
 Manage your passkeys and access one-time passwords with this full-featured
@@ -50,15 +52,10 @@ Visit https://seedkeeper.io to learn more.
 |===
 
 === Installation
-Downloads for all supported operating systems are available
-https://www.yubico.com/products/yubico-authenticator/[here].
 
 ==== Linux
 On Linux platforms you will need pcscd installed and running to be able to
-communicate with a YubiKey over the SmartCard interface. Additionally, you may
-need to set permissions for your user to access YubiKeys via the HID
-interfaces. The relevant permissions are described
-https://developers.yubico.com/yubikey-manager/Device_Permissions.html[here].
+communicate with a Seedkeeper over the SmartCard interface.
 
 For some configurations running Wayland, copying an OTP to clipboard only works
 when the app has focus. If you are unable to reliably copy to clipboard from
@@ -70,14 +67,6 @@ For example: `_YA_TRAY_CLIPBOARD=/usr/bin/wl-copy`.
 
 NOTE: Only use a trusted binary, OTPs will be sent to this when copied to clipboard from the systray!
 
-=== Command line interface
-Looking for a command line option? Try our
-https://github.com/Yubico/yubikey-manager/[YubiKey Manager CLI] tool.
-
-=== iOS
-The iOS version of this app is available
-https://github.com/Yubico/yubioath-ios[here].
-
 === Localization
 If you are interested in helping out with translations for any language, you are welcome to join us at https://crowdin.com/project/yubico-authenticator[Crowdin] (no programming skills needed).
 
@@ -87,4 +76,4 @@ link:doc/Development.adoc[here].
 
 === Acknowledgement ===
 
-This app is based on the [Yubioath-Flutter application](https://github.com/Yubico/yubioath-flutter) by Yubico.
+This app is based on the https://github.com/Yubico/yubioath-flutter[Yubioath-Flutter application] by Yubico.
