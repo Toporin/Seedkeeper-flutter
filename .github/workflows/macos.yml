@@ -1,6 +1,9 @@
 name: macOS
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -15,6 +18,7 @@ jobs:
         export $(cat .github/workflows/env)
         cat .github/workflows/env >> $GITHUB_ENV
         echo CACHE_KEY=${{ runner.os }}-py$PYVER-${{ hashFiles('build-helper.sh', 'helper/**')}} >> $GITHUB_ENV
+        echo "SIGN=${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}" >> $GITHUB_ENV
 
     - name: Check app versions
       run: |
@@ -80,6 +84,58 @@ jobs:
     - name: Check generated files
       run: git diff --exit-code
 
+    - name: Import signing certificate
+      if: env.SIGN == 'true'
+      env:
+        MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+        MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+        KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+      run: |
+        echo "$MACOS_CERTIFICATE" | base64 --decode -o certificate.p12
+        security create-keychain -p "$KEYCHAIN_PASSWORD" build.keychain
+        security default-keychain -s build.keychain
+        security unlock-keychain -p "$KEYCHAIN_PASSWORD" build.keychain
+        security set-keychain-settings -lut 21600 build.keychain
+        security import certificate.p12 -k build.keychain -P "$MACOS_CERTIFICATE_PWD" -T /usr/bin/codesign
+        security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" build.keychain
+        security list-keychains -d user -s build.keychain
+        rm certificate.p12
+
+    - name: Sign the app
+      if: env.SIGN == 'true'
+      env:
+        MACOS_SIGN_IDENTITY: ${{ secrets.MACOS_SIGN_IDENTITY }}
+      run: |
+        APP="build/macos/Build/Products/Release/Seedkeeper PRO Manager.app"
+        IDENTITY="$MACOS_SIGN_IDENTITY"
+        # Sign the helper binary, with entitlements + hardened runtime
+        codesign -f --timestamp --options runtime --entitlements macos/helper.entitlements \
+          --sign "$IDENTITY" "$APP/Contents/Resources/helper/authenticator-helper"
+        # Sign the dylib and .so files, without entitlements
+        codesign -f --timestamp --options runtime --sign "$IDENTITY" \
+          $(find "$APP/Contents/Resources/helper/_internal/" -name "*.dylib" -o -name "*.so")
+        # Sign the bundled Python binary, without entitlements
+        codesign -f --timestamp --options runtime --sign "$IDENTITY" \
+          "$APP/Contents/Resources/helper/_internal/Python"
+        # Sign the GUI, deep, with Release entitlements
+        codesign -f --timestamp --options runtime --entitlements macos/Runner/Release.entitlements \
+          --deep --sign "$IDENTITY" "$APP"
+
+    - name: Notarize and staple the app
+      if: env.SIGN == 'true'
+      env:
+        MACOS_NOTARY_KEY: ${{ secrets.MACOS_NOTARY_KEY }}
+        MACOS_NOTARY_KEY_ID: ${{ secrets.MACOS_NOTARY_KEY_ID }}
+        MACOS_NOTARY_ISSUER_ID: ${{ secrets.MACOS_NOTARY_ISSUER_ID }}
+      run: |
+        APP="build/macos/Build/Products/Release/Seedkeeper PRO Manager.app"
+        echo "$MACOS_NOTARY_KEY" | base64 --decode -o notary_key.p8
+        ditto -c -k --sequesterRsrc --keepParent "$APP" "Seedkeeper PRO Manager.zip"
+        xcrun notarytool submit "Seedkeeper PRO Manager.zip" \
+          --key notary_key.p8 --key-id "$MACOS_NOTARY_KEY_ID" --issuer "$MACOS_NOTARY_ISSUER_ID" --wait
+        xcrun stapler staple -v "$APP"
+        rm notary_key.p8 "Seedkeeper PRO Manager.zip"
+
     - name: Create dmg
       run: |
         brew install create-dmg
@@ -87,6 +143,21 @@ jobs:
         cp -R build/macos/Build/Products/Release/"Seedkeeper PRO Manager.app" source_folder
         cp resources/icons/dmg-background.png .
         sh create-dmg.sh
+
+    - name: Sign, notarize and staple the dmg
+      if: env.SIGN == 'true'
+      env:
+        MACOS_SIGN_IDENTITY: ${{ secrets.MACOS_SIGN_IDENTITY }}
+        MACOS_NOTARY_KEY: ${{ secrets.MACOS_NOTARY_KEY }}
+        MACOS_NOTARY_KEY_ID: ${{ secrets.MACOS_NOTARY_KEY_ID }}
+        MACOS_NOTARY_ISSUER_ID: ${{ secrets.MACOS_NOTARY_ISSUER_ID }}
+      run: |
+        codesign -f --timestamp --options runtime --sign "$MACOS_SIGN_IDENTITY" yubioath-desktop.dmg
+        echo "$MACOS_NOTARY_KEY" | base64 --decode -o notary_key.p8
+        xcrun notarytool submit yubioath-desktop.dmg \
+          --key notary_key.p8 --key-id "$MACOS_NOTARY_KEY_ID" --issuer "$MACOS_NOTARY_ISSUER_ID" --wait
+        xcrun stapler staple -v yubioath-desktop.dmg
+        rm notary_key.p8
 
     - name: Rename and archive app bundle
       run: |
