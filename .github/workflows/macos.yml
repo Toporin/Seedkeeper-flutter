@@ -112,8 +112,9 @@ jobs:
         codesign -f --timestamp --options runtime --entitlements macos/helper.entitlements \
           --sign "$IDENTITY" "$APP/Contents/Resources/helper/authenticator-helper"
         # Sign the dylib and .so files, without entitlements
-        codesign -f --timestamp --options runtime --sign "$IDENTITY" \
-          $(find "$APP/Contents/Resources/helper/_internal/" -name "*.dylib" -o -name "*.so")
+        # Use find -exec so paths containing spaces (the .app name) are passed intact
+        find "$APP/Contents/Resources/helper/_internal/" \( -name "*.dylib" -o -name "*.so" \) \
+          -exec codesign -f --timestamp --options runtime --sign "$IDENTITY" {} +
         # Sign the bundled Python binary, without entitlements
         codesign -f --timestamp --options runtime --sign "$IDENTITY" \
           "$APP/Contents/Resources/helper/_internal/Python"
