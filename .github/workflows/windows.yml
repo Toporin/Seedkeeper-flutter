@@ -1,6 +1,6 @@
 name: Windows
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
@@ -14,6 +14,7 @@ jobs:
           export $(cat .github/workflows/env)
           cat .github/workflows/env >> $GITHUB_ENV
           echo CACHE_KEY=${{ runner.os }}-py-$PYVER-${{ hashFiles('build-helper.bat', 'helper/**')}} >> $GITHUB_ENV
+          echo "SIGN=${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}" >> $GITHUB_ENV
 
       - name: Check app versions
         run: |
@@ -87,6 +88,22 @@ jobs:
           mv resources\win\release-win.ps1 deploy
           mv resources\win\verify_dll.ps1 deploy
           mv resources deploy
+          "WIN_APP_DIR=$dest" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Sign exe/dll with Azure Trusted Signing
+        if: env.SIGN == 'true'
+        uses: azure/trusted-signing-action@208f8af4bf26cf2af8597424e3cb5582801523ba # v2.0.0
+        with:
+          azure-tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          azure-client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          azure-client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+          endpoint: ${{ secrets.AZURE_SIGNING_ENDPOINT }}
+          signing-account-name: ${{ secrets.AZURE_SIGNING_ACCOUNT }}
+          certificate-profile-name: ${{ secrets.AZURE_CERT_PROFILE }}
+          files-folder: ${{ env.WIN_APP_DIR }}
+          files-folder-filter: dll,exe
+          files-folder-recurse: true
+          timeout: 600
 
       - name: Upload artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -94,105 +111,18 @@ jobs:
           name: yubioath-desktop-windows
           path: deploy
 
-  sign-source:
-    if: startsWith(github.ref, 'refs/tags/')
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check tag format
-      run: |
-        if [[ "${GITHUB_REF}" =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+-rc\.[0-9]+$ ]]; then
-          echo "Tag matches format"
-        else
-          echo "Invalid tag format"
-          exit 1
-        fi
-
-    - name: checkout repo
-      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-
-    - name: download artifacts
-      uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-      with:
-        path: yubioath-desktop-windows
-
-    - name: docker login
-      uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
-      with:
-        registry: ghcr.io
-        username: ci@yubico.com
-        password: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: write service account credentials
-      env:
-        GAC: ${{ secrets.SCRIBE_SA }}
-      run: |
-        echo "${GAC}" > scribe_sa.json
-        echo "GOOGLE_APPLICATION_CREDENTIALS=/scribe/scribe_sa.json" >> $GITHUB_ENV
-
-    - name: run scribe exe dll
-      run: >
-        docker run
-        --user $(id -u):$(id -g)
-        --volume $(pwd):/scribe
-        --env-file <(env)
-        ghcr.io/yubico/scribe-ci:v1
-        --project-id scribe-prod-987134
-        --bucket scribe-u-pub-yubioath-flutter-f94pro
-        --config /scribe/.github/scribe-sign-exe-dll.yml
-        submit .
-        --synchronous
-        --download-artifacts
-
-    - name: unpack signed artifacts
-      run: |
-        mkdir -p signed
-        mv scribe-download/*/sign-source/1.zip signed/
-        rm -rf scribe-download
-        cd signed
-        unzip -j 1.zip || true
-        rm 1.zip
-        cd ..
-        cp signed/authenticator-helper.exe yubioath-desktop-windows/*/helper/authenticator-helper.exe
-        cp signed/authenticator.exe yubioath-desktop-windows/*/authenticator.exe
-        cp signed/desktop_drop_plugin.dll yubioath-desktop-windows/*/desktop_drop_plugin.dll
-        cp signed/flutter_windows.dll yubioath-desktop-windows/*/flutter_windows.dll
-        cp signed/local_notifier_plugin.dll yubioath-desktop-windows/*/local_notifier_plugin.dll
-        cp signed/screen_retriever_windows_plugin.dll yubioath-desktop-windows/*/screen_retriever_windows_plugin.dll
-        cp signed/tray_manager_plugin.dll yubioath-desktop-windows/*/tray_manager_plugin.dll
-        cp signed/url_launcher_windows_plugin.dll yubioath-desktop-windows/*/url_launcher_windows_plugin.dll
-        cp signed/window_manager_plugin.dll yubioath-desktop-windows/*/window_manager_plugin.dll
-        cp signed/dartjni.dll yubioath-desktop-windows/*/dartjni.dll
-        cp signed/pythoncom314.dll yubioath-desktop-windows/*/helper/_internal/pywin32_system32/pythoncom314.dll
-        cp signed/pywintypes314.dll yubioath-desktop-windows/*/helper/_internal/pywin32_system32/pywintypes314.dll
-
-    - name: upload signed artifacts
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-      with:
-        name: signed-files
-        path: yubioath-desktop-windows
-        if-no-files-found: error
-        compression-level: 0
-
   build-msi:
-    if: startsWith(github.ref, 'refs/tags/')
-    needs: [sign-source]
+    if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
+    needs: [build]
     runs-on: windows-latest
     steps:
-      - name: Check tag format
-        shell: bash
-        run: |
-          if [[ "${GITHUB_REF}" =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+-rc\.[0-9]+$ ]]; then
-            echo "Tag matches format"
-          else
-            echo "Invalid tag format"
-            exit 1
-          fi
-
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
-      - name: Download /signed dir
+      - name: Download signed app artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: yubioath-desktop-windows
+          path: signed-files
 
       - name: Read variables from repo
         shell: bash
@@ -208,94 +138,40 @@ jobs:
           candle .\fragment.wxs .\resources\win\yubioath-desktop.wxs -ext WixUtilExtension -arch x64
           light fragment.wixobj yubioath-desktop.wixobj -ext WixUIExtension -ext WixUtilExtension -o yubioath-desktop.msi
 
-      - name: Rename and archive app bundle
+      - name: Move .msi into installer dir
         run: |
-          $arr = $env:GITHUB_REF -split '/'
-          $branch = $arr[2]
-          $dest = "installer\yubioath-desktop-$branch-windows"
           mkdir installer
           mv yubioath-desktop.msi installer
 
-      - name: Upload artifact
+      - name: Sign MSI with Azure Trusted Signing
+        uses: azure/trusted-signing-action@208f8af4bf26cf2af8597424e3cb5582801523ba # v2.0.0
+        with:
+          azure-tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          azure-client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          azure-client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+          endpoint: ${{ secrets.AZURE_SIGNING_ENDPOINT }}
+          signing-account-name: ${{ secrets.AZURE_SIGNING_ACCOUNT }}
+          certificate-profile-name: ${{ secrets.AZURE_CERT_PROFILE }}
+          files-folder: installer
+          files-folder-filter: msi
+
+      - name: Upload signed installer
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: installer
+          name: signed-installer
           path: installer
-
-  sign-msi:
-    if: startsWith(github.ref, 'refs/tags/')
-    needs: [build-msi]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check tag
-      run: |
-        if [[ "${GITHUB_REF}" =~ ^refs/tags/[0-9]+\.[0-9]+\.[0-9]+-rc\.[0-9]+$ ]]; then
-          echo "Tag matches format"
-        else
-          echo "Invalid tag format"
-          exit 1
-        fi
-
-    - name: checkout repo
-      uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-
-    - name: download artifacts
-      uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-
-    - name: docker login
-      uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
-      with:
-        registry: ghcr.io
-        username: ci@yubico.com
-        password: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: write service account credentials
-      env:
-        GAC: ${{ secrets.SCRIBE_SA }}
-      run: |
-        echo "${GAC}" > scribe_sa.json
-        echo "GOOGLE_APPLICATION_CREDENTIALS=/scribe/scribe_sa.json" >> $GITHUB_ENV
-
-    - name: run scribe msi
-      run: >
-        docker run
-        --user $(id -u):$(id -g)
-        --volume $(pwd):/scribe
-        --env-file <(env)
-        ghcr.io/yubico/scribe-ci:v1
-        --project-id scribe-prod-987134
-        --bucket scribe-u-pub-yubioath-flutter-f94pro
-        --config /scribe/.github/scribe-sign-msi.yml
-        submit .
-        --synchronous
-        --download-artifacts
-
-    - name: unpack signed artifacts-msi
-      run: |
-        mkdir -p signed
-        mv scribe-download/*/sign-source/1.zip signed/
-        rm -rf scribe-download
-        cd signed
-        unzip -j 1.zip || true
-        rm 1.zip
-        cd ..
-
-    - name: upload signed artifacts
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-      with:
-        name: signed-installer
-        path: signed/*
-        if-no-files-found: error
-        compression-level: 0
+          if-no-files-found: error
+          compression-level: 0
 
   verify-signatures:
-    needs: [sign-msi]
+    if: ${{ startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch' }}
+    needs: [build-msi]
     runs-on: windows-latest
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: signed-files
+          name: yubioath-desktop-windows
           path: downloaded-artifact
 
       - name: Check for unsigned DLLs
