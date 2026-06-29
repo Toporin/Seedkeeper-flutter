@@ -34,3 +34,44 @@ plugins {
 }
 
 include ':app'
+
+// Build against the yubikit-android fork via a composite build, pinned to a
+// remote git tag. If the fork isn't already checked out alongside this repo,
+// clone it automatically at the pinned tag so both local and CI builds use the
+// remote GitHub repository without a manual checkout. A developer who keeps
+// their own working copy at this path is left untouched (so local iteration on
+// the fork keeps working); delete it to fall back to the pinned remote tag.
+//
+// Note: a Gradle `sourceControl` source dependency cannot be used here because
+// the fork's own build includes `build-logic` (nested includeBuild), which
+// Gradle does not support for source-dependency builds.
+def yubikitFork = file('../../yubikit-android')
+def yubikitRepo = 'https://github.com/Toporin/yubikit-android.git'
+def yubikitTag = '3.1.1-sk1'
+if (!yubikitFork.exists()) {
+    println "yubikit-android fork not found; cloning ${yubikitRepo} @ ${yubikitTag} into ${yubikitFork}"
+    def process = new ProcessBuilder(
+        'git', 'clone', '--depth', '1', '--branch', yubikitTag,
+        yubikitRepo, yubikitFork.absolutePath
+    ).inheritIO().start()
+    if (process.waitFor() != 0) {
+        throw new GradleException(
+            "Failed to clone the yubikit-android fork. Clone it manually:\n" +
+            "  git clone --branch ${yubikitTag} ${yubikitRepo} ${yubikitFork.absolutePath}")
+    }
+}
+
+// The fork's modules share the upstream group `com.yubico.yubikit`, so these
+// substitutions transparently replace the published artifacts declared in
+// android/app/build.gradle with the local Gradle projects.
+includeBuild(yubikitFork) {
+    dependencySubstitution {
+        substitute module('com.yubico.yubikit:android')    using project(':android')
+        substitute module('com.yubico.yubikit:core')       using project(':core')
+        substitute module('com.yubico.yubikit:management')  using project(':management')
+        substitute module('com.yubico.yubikit:oath')        using project(':oath')
+        substitute module('com.yubico.yubikit:fido')        using project(':fido')
+        substitute module('com.yubico.yubikit:piv')         using project(':piv')
+        substitute module('com.yubico.yubikit:support')     using project(':support')
+    }
+}
