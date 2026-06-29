@@ -20,8 +20,6 @@ import com.yubico.authenticator.compatUtil
 import com.yubico.authenticator.device.Info
 import com.yubico.authenticator.device.restrictedNfcDeviceInfo
 import com.yubico.authenticator.device.unknownDeviceWithCapability
-import com.yubico.authenticator.device.unknownFido2DeviceInfo
-import com.yubico.authenticator.device.unknownOathDeviceInfo
 import com.yubico.yubikit.android.transport.nfc.NfcYubiKeyDevice
 import com.yubico.yubikit.android.transport.usb.UsbYubiKeyDevice
 import com.yubico.yubikit.core.Version
@@ -34,6 +32,7 @@ import com.yubico.yubikit.core.smartcard.Apdu
 import com.yubico.yubikit.core.smartcard.SmartCardConnection
 import com.yubico.yubikit.core.smartcard.SmartCardProtocol
 import com.yubico.yubikit.fido.ctap.Ctap2Session
+import com.yubico.yubikit.management.Capability
 import com.yubico.yubikit.oath.OathSession
 import com.yubico.yubikit.support.DeviceUtil
 import org.slf4j.LoggerFactory
@@ -79,27 +78,47 @@ class DeviceInfoHelper {
                 try {
                     device.openConnection(SmartCardConnection::class.java)
                         .use { smartCardConnection ->
+                            // A device may expose several applets (e.g. a Seedkeeper
+                            // PRO has both OATH and FIDO2). Probe each applet
+                            // independently and combine the capabilities instead of
+                            // returning on the first match, otherwise FIDO2 stays
+                            // hidden behind OATH.
+                            var capabilities = 0
                             try {
-                                // if OATH session is available use it
                                 OathSession(smartCardConnection)
                                 logger.debug("Device supports OATH")
-                                return unknownOathDeviceInfo(device.transport)
+                                capabilities = capabilities or Capability.OATH.bit
                             } catch (_: ApplicationNotAvailableException) {
-                                try {
-                                    // probe for CTAP2 availability
-                                    Ctap2Session(smartCardConnection)
-                                    logger.debug("Device supports FIDO2")
-                                    return unknownFido2DeviceInfo(device.transport)
-                                } catch (_: ApplicationNotAvailableException) {
-                                    // probe for NFC restricted device
-                                    if (isNfcRestricted(smartCardConnection)) {
-                                        logger.debug("Device has restricted NFC")
-                                        return restrictedNfcDeviceInfo(device.transport)
-                                    }
-                                    logger.debug("Device not recognized")
-                                    return unknownDeviceWithCapability(device.transport)
-                                }
+                                // OATH applet not present
                             }
+                            try {
+                                Ctap2Session(smartCardConnection)
+                                logger.debug("Device supports FIDO2")
+                                capabilities = capabilities or Capability.FIDO2.bit
+                            } catch (_: ApplicationNotAvailableException) {
+                                // FIDO2/CTAP2 applet not present
+                            }
+
+                            if (capabilities != 0) {
+                                val name = when (capabilities) {
+                                    Capability.OATH.bit -> "OATH device"
+                                    Capability.FIDO2.bit -> "FIDO2 device"
+                                    else -> "Security Key"
+                                }
+                                return unknownDeviceWithCapability(
+                                    device.transport,
+                                    capabilities,
+                                    name
+                                )
+                            }
+
+                            // probe for NFC restricted device
+                            if (isNfcRestricted(smartCardConnection)) {
+                                logger.debug("Device has restricted NFC")
+                                return restrictedNfcDeviceInfo(device.transport)
+                            }
+                            logger.debug("Device not recognized")
+                            return unknownDeviceWithCapability(device.transport)
                         }
                 } catch (e: Exception) {
                     // no smart card connectivity

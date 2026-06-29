@@ -17,7 +17,6 @@
 package com.yubico.authenticator.device
 
 import com.yubico.yubikit.core.Transport
-import com.yubico.yubikit.management.Capability
 import com.yubico.yubikit.management.FormFactor
 
 val UnknownDevice = Info(
@@ -44,7 +43,11 @@ val UnknownDevice = Info(
     versionQualifier = VersionQualifier()
 )
 
-fun unknownDeviceWithCapability(transport: Transport, bit: Int = 0): Info {
+fun unknownDeviceWithCapability(
+    transport: Transport,
+    bit: Int = 0,
+    name: String = "unknown-device"
+): Info {
     val isNfc = transport == Transport.NFC
     val capabilities = Capabilities(
         nfc = if (isNfc) bit else null,
@@ -53,19 +56,10 @@ fun unknownDeviceWithCapability(transport: Transport, bit: Int = 0): Info {
     return UnknownDevice.copy(
         isNfc = isNfc,
         config = UnknownDevice.config.copy(enabledCapabilities = capabilities),
-        supportedCapabilities = capabilities
+        supportedCapabilities = capabilities,
+        name = name
     )
 }
-
-fun unknownOathDeviceInfo(transport: Transport): Info =
-    unknownDeviceWithCapability(transport, Capability.OATH.bit).copy(
-        name = "OATH device"
-    )
-
-fun unknownFido2DeviceInfo(transport: Transport): Info =
-    unknownDeviceWithCapability(transport, Capability.FIDO2.bit).copy(
-        name = "FIDO2 device"
-    )
 
 fun restrictedNfcDeviceInfo(transport: Transport): Info {
     if (transport != Transport.NFC) {
