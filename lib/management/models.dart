@@ -48,7 +48,8 @@ enum Capability {
   openpgp(0x008),
   hsmauth(0x100),
   u2f(0x002),
-  fido2(0x200);
+  fido2(0x200),
+  seedkeeper(0x1000);
 
   final int value;
   const Capability(this.value);
@@ -61,6 +62,7 @@ enum Capability {
     Capability.hsmauth => l10n.s_capability_hsmauth,
     Capability.u2f => l10n.s_capability_u2f,
     Capability.fido2 => l10n.s_capability_fido2,
+    Capability.seedkeeper => l10n.s_capability_seedkeeper,
   };
 }
 

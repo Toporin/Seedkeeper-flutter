@@ -41,6 +41,8 @@ class DeviceInfoHelper {
     companion object {
         private val logger = LoggerFactory.getLogger("DeviceInfoHelper")
         private val nfcTagReaderAid = byteArrayOf(0xD2.toByte(), 0x76, 0, 0, 0x85.toByte(), 1, 1)
+        private val seedkeeperAid =
+            byteArrayOf(0x53, 0x65, 0x65, 0x64, 0x4b, 0x65, 0x65, 0x70, 0x65, 0x72, 0x00)
         private val uri = "yubico.com/getting-started".toByteArray()
         private val restrictedNfcBytes =
             byteArrayOf(0x00, 0x1F, 0xD1.toByte(), 0x01, 0x1b, 0x55, 0x04) + uri
@@ -98,11 +100,25 @@ class DeviceInfoHelper {
                             } catch (_: ApplicationNotAvailableException) {
                                 // FIDO2/CTAP2 applet not present
                             }
+                            try {
+                                // Probe last so it doesn't disturb the OATH/FIDO2
+                                // session constructors above.
+                                SmartCardProtocol(smartCardConnection).select(seedkeeperAid)
+                                logger.debug("Device supports Seedkeeper")
+                                capabilities = capabilities or Capability.SEEDKEEPER.bit
+                            } catch (_: ApplicationNotAvailableException) {
+                                // Seedkeeper applet not present
+                            }
 
                             if (capabilities != 0) {
-                                val name = when (capabilities) {
-                                    Capability.OATH.bit -> "OATH device"
-                                    Capability.FIDO2.bit -> "FIDO2 device"
+                                val hasSeedkeeper =
+                                    (capabilities and Capability.SEEDKEEPER.bit) != 0
+                                val hasFido2 = (capabilities and Capability.FIDO2.bit) != 0
+                                val name = when {
+                                    hasSeedkeeper && hasFido2 -> "Seedkeeper PRO"
+                                    hasSeedkeeper -> "Seedkeeper"
+                                    capabilities == Capability.OATH.bit -> "OATH device"
+                                    capabilities == Capability.FIDO2.bit -> "FIDO2 device"
                                     else -> "Security Key"
                                 }
                                 return unknownDeviceWithCapability(
