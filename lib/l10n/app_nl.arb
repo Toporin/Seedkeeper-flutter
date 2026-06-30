@@ -223,6 +223,7 @@
     "s_capability_piv": "PIV",
     "s_capability_openpgp": "OpenPGP",
     "s_capability_hsmauth": "YubiHSM Auth",
+    "s_capability_seedkeeper": "Seedkeeper",
     "@_app_configuration": {},
 
     "s_toggle_applications": "Toepassingen wisselen",
