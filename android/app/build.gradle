@@ -44,7 +44,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.yubico.yubioath"
+        applicationId "io.seedkeeper.manager"
         minSdk = project.minSdkVersion
         targetSdk = project.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
