@@ -210,7 +210,7 @@ Future<Widget> initialize(List<String> argv) async {
   _initLicenses();
 
   await localNotifier.setup(
-    appName: 'Seedkeeper PRO Manager',
+    appName: 'Seedkeeper PRO',
     shortcutPolicy: ShortcutPolicy.ignore,
   );
 

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_label" translatable="false">Seedkeeper PRO Manager</string>
+    <string name="app_label" translatable="false">Seedkeeper PRO</string>
     <string name="p_ndef_set_otp">Successfully copied OTP code from Seedkeeper to clipboard.</string>
     <string name="p_ndef_set_password">Successfully copied password from Seedkeeper to clipboard.</string>
     <string name="p_ndef_parse_failure">Failed to parse OTP code from Seedkeeper.</string>

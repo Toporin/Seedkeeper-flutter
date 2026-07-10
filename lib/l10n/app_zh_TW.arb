@@ -1,7 +1,7 @@
 {
     "@@locale": "zh_TW",
 
-    "app_name": "Seedkeeper PRO Manager",
+    "app_name": "Seedkeeper PRO",
     "native_language_name": "繁體中文",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -950,8 +950,8 @@
     "l_admin_privileges_required": "需要管理員權限",
     "p_elevated_permissions_required": "管理此裝置需要提升權限。或者，您可以使用 Windows 設定來管理 FIDO 配置。",
     "p_webauthn_elevated_permissions_required": "管理此裝置需要提升權限。或者，您可以使用 Windows 設定來管理 FIDO 配置。",
-    "p_ms_store_permission_note": "由於受到 Windows 的沙盒限制，Microsoft Store 版本的應用程式一般無法提升權限。我們建議您從官方 .msi 安裝程式安裝 Seedkeeper PRO Manager。",
-    "p_need_camera_permission": "Seedkeeper PRO Manager 需要相機權限才能掃描 QR Code。",
+    "p_ms_store_permission_note": "由於受到 Windows 的沙盒限制，Microsoft Store 版本的應用程式一般無法提升權限。我們建議您從官方 .msi 安裝程式安裝 Seedkeeper PRO。",
+    "p_need_camera_permission": "Seedkeeper PRO 需要相機權限才能掃描 QR Code。",
     "@_qr_codes": {},
 
     "s_qr_scan": "掃描 QR Code",
@@ -1073,7 +1073,7 @@
     "l_on_yk_nfc_tap": "使用 NFC 感應時",
     "l_on_yk_usb_insert": "使用 USB 插入時",
     "l_do_nothing": "不執行任何動作",
-    "l_launch_ya": "啟動 Seedkeeper PRO Manager",
+    "l_launch_ya": "啟動 Seedkeeper PRO",
     "l_copy_otp_clipboard": "複製 OTP 到剪貼簿",
     "l_launch_and_copy_otp": "啟動應用程式並複製 OTP",
     "l_kbd_layout_for_static": "鍵盤配置（用於靜態密碼）",

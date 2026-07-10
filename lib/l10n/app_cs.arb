@@ -1,7 +1,7 @@
 {
     "@@locale": "cs",
 
-    "app_name": "Seedkeeper PRO Manager",
+    "app_name": "Seedkeeper PRO",
     "native_language_name": "Čeština",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -950,8 +950,8 @@
     "l_admin_privileges_required": "Vyžadována oprávnění administrátora",
     "p_elevated_permissions_required": "Správa tohoto zařízení vyžaduje zvýšená oprávnění. Můžete také použít nastavení Windows pro správu konfigurace FIDO.",
     "p_webauthn_elevated_permissions_required": "Správa WebAuthn vyžaduje zvýšená oprávnění, případně můžete použít nastavení Windows pro správu konfigurace FIDO.",
-    "p_ms_store_permission_note": "Verze aplikace Microsoft Store obvykle nemůže zvýšit oprávnění kvůli omezení funkce sandboxing Windows. Doporučujeme nainstalovat Seedkeeper PRO Manager z našeho oficiálního .msi instalátoru.",
-    "p_need_camera_permission": "Seedkeeper PRO Manager potřebuje oprávnění kamery pro skenování QR kódů.",
+    "p_ms_store_permission_note": "Verze aplikace Microsoft Store obvykle nemůže zvýšit oprávnění kvůli omezení funkce sandboxing Windows. Doporučujeme nainstalovat Seedkeeper PRO z našeho oficiálního .msi instalátoru.",
+    "p_need_camera_permission": "Seedkeeper PRO potřebuje oprávnění kamery pro skenování QR kódů.",
     "@_qr_codes": {},
 
     "s_qr_scan": "Skenování kódu QR",
@@ -1073,7 +1073,7 @@
     "l_on_yk_nfc_tap": "Při klepnutí na NFC",
     "l_on_yk_usb_insert": "Při připojení do USB",
     "l_do_nothing": "Nedělat nic",
-    "l_launch_ya": "Spustit Seedkeeper PRO Manager",
+    "l_launch_ya": "Spustit Seedkeeper PRO",
     "l_copy_otp_clipboard": "Kopírovat OTP do schránky",
     "l_launch_and_copy_otp": "Spustit aplikaci a zkopírovat OTP do schránky",
     "l_kbd_layout_for_static": "Rozložení klávesnice (pro statické heslo)",

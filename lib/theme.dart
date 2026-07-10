@@ -19,8 +19,8 @@ import 'package:flutter/material.dart';
 import 'core/state.dart';
 
 // const defaultPrimaryColor = Colors.lightGreen;
-// const defaultPrimaryColor = Color(0xFFB09162);
-const defaultPrimaryColor = Color(0xFF9c7af2);
+const defaultPrimaryColor = Color(0xFFB09162);
+//const defaultPrimaryColor = Color(0xFF9c7af2);
 
 class AppTheme {
   static ThemeData getLightTheme(Color primaryColor) =>

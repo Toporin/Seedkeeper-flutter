@@ -1,7 +1,7 @@
 {
     "@@locale": "sk",
 
-    "app_name": "Seedkeeper PRO Manager",
+    "app_name": "Seedkeeper PRO",
     "native_language_name": "Slovenčina",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -950,8 +950,8 @@
     "l_admin_privileges_required": "Vyžadujú sa oprávnenia správcu",
     "p_elevated_permissions_required": "Spravovanie tohto zariadenia vyžaduje zvýšené oprávnenia. Alternatívne môžete na správu nastavenia FIDO použiť Nastavenia systému Windows.",
     "p_webauthn_elevated_permissions_required": "Spravovanie WebAuthn vyžaduje zvýšené oprávnenia. Alternatívne môžete na správu nastavenia FIDO použiť Nastavenia systému Windows.",
-    "p_ms_store_permission_note": "Verzia aplikácie z Microsoft Store zvyčajne nedokáže zvýšiť oprávnenia kvôli obmedzeniam sandboxu v systéme Windows. Odporúčame nainštalovať aplikáciu Seedkeeper PRO Manager z nášho oficiálneho inštalačného programu .msi.",
-    "p_need_camera_permission": "Aplikácia Seedkeeper PRO Manager potrebuje na skenovanie QR kódov povolenia kamery.",
+    "p_ms_store_permission_note": "Verzia aplikácie z Microsoft Store zvyčajne nedokáže zvýšiť oprávnenia kvôli obmedzeniam sandboxu v systéme Windows. Odporúčame nainštalovať aplikáciu Seedkeeper PRO z nášho oficiálneho inštalačného programu .msi.",
+    "p_need_camera_permission": "Aplikácia Seedkeeper PRO potrebuje na skenovanie QR kódov povolenia kamery.",
     "@_qr_codes": {},
 
     "s_qr_scan": "Skenovať QR kód",
@@ -1073,7 +1073,7 @@
     "l_on_yk_nfc_tap": "Pri dotyku NFC",
     "l_on_yk_usb_insert": "Pri vložení do USB",
     "l_do_nothing": "Neurobiť nič",
-    "l_launch_ya": "Spustiť Seedkeeper PRO Manager",
+    "l_launch_ya": "Spustiť Seedkeeper PRO",
     "l_copy_otp_clipboard": "Skopírovať OTP do schránky",
     "l_launch_and_copy_otp": "Spustite aplikáciu a skopírujte OTP",
     "l_kbd_layout_for_static": "Rozloženie klávesnice (pre statické heslo)",

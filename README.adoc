@@ -1,4 +1,4 @@
-== Seedkeeper PRO Manager for Desktop and Android
+== Seedkeeper PRO for Desktop and Android
 
 NOTE: This is a community fork of Yubico's https://github.com/Yubico/yubioath-flutter[Yubioath-Flutter application], adapted to manage Seedkeeper PRO devices instead of YubiKeys.
 
@@ -19,10 +19,10 @@ companion app to the Seedkeeper PRO.
 Store your unique credential on a hardware-backed security key and take it
 wherever you go from mobile to desktop. No more storing sensitive secrets on
 your mobile phone, leaving your accounts vulnerable to takeovers. With the
-Seedkeeper PRO Manager you can raise the bar for security. No
+Seedkeeper PRO you can raise the bar for security. No
 connectivity needed!
 
-Experience security the modern way with the Seedkeeper PRO Manager.
+Experience security the modern way with the Seedkeeper PRO.
 Visit https://seedkeeper.io to learn more.
 
 === Supported platforms

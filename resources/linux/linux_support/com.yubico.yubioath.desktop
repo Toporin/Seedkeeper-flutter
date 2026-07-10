@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=Seedkeeper PRO Manager
-GenericName=Seedkeeper PRO Manager
+Name=Seedkeeper PRO
+GenericName=Seedkeeper PRO
 Exec="@EXEC_PATH/authenticator"
 Icon=@EXEC_PATH/linux_support/com.yubico.yubioath.png
 Type=Application

@@ -1,7 +1,7 @@
 {
     "@@locale": "hu",
 
-    "app_name": "Seedkeeper PRO Manager",
+    "app_name": "Seedkeeper PRO",
     "native_language_name": "Magyar",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -950,8 +950,8 @@
     "l_admin_privileges_required": "Rendszergazdai jogosultságok szükségesek",
     "p_elevated_permissions_required": "Ennek az eszköznek a kezeléséhez emelt szintű jogosultságok szükségesek. Alternatív megoldásként a Windows-beállítások segítségével is kezelheti a FIDO-konfigurációt.",
     "p_webauthn_elevated_permissions_required": "A WebAuthn kezelése emelt szintű jogosultságokat igényel. Alternatív megoldásként a Windows-beállítások segítségével is kezelheti a FIDO-konfigurációt.",
-    "p_ms_store_permission_note": "Az alkalmazás Microsoft Store verziója a Windows sandbox-korlátozásai miatt általában nem képes a jogosultságok emelésére. Javasoljuk, hogy a Seedkeeper PRO Manager-t a hivatalos .msi telepítőnkből telepítse.",
-    "p_need_camera_permission": "A Seedkeeper PRO Managernak kamera-hozzáférésre van szüksége a QR-kódok beolvasásához.",
+    "p_ms_store_permission_note": "Az alkalmazás Microsoft Store verziója a Windows sandbox-korlátozásai miatt általában nem képes a jogosultságok emelésére. Javasoljuk, hogy a Seedkeeper PRO-t a hivatalos .msi telepítőnkből telepítse.",
+    "p_need_camera_permission": "A Seedkeeper PROnak kamera-hozzáférésre van szüksége a QR-kódok beolvasásához.",
     "@_qr_codes": {},
 
     "s_qr_scan": "QR-kód szkennelése",
@@ -1073,7 +1073,7 @@
     "l_on_yk_nfc_tap": "NFC érintésnél",
     "l_on_yk_usb_insert": "USB behelyezésnél",
     "l_do_nothing": "Ne csináljon semmit",
-    "l_launch_ya": "Indítsa el a Seedkeeper PRO Manager-t",
+    "l_launch_ya": "Indítsa el a Seedkeeper PRO-t",
     "l_copy_otp_clipboard": "OTP másolása vágólapra",
     "l_launch_and_copy_otp": "Indítsa el az alkalmazást és másolja az OTP-t",
     "l_kbd_layout_for_static": "Billentyűzetkiosztás (statikus jelszóhoz)",

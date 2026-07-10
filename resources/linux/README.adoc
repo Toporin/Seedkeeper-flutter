@@ -1,11 +1,11 @@
 == Instructions for Linux
 
 === Basic usage
-To run Seedkeeper PRO Manager, execute the authenticator binary by double clicking or running it from command line:
+To run Seedkeeper PRO, execute the authenticator binary by double clicking or running it from command line:
 
   ./authenticator
 
-You will need to have pcscd installed and running for Seedkeeper PRO Manager to work.
+You will need to have pcscd installed and running for Seedkeeper PRO to work.
 On Ubuntu:
 
   sudo apt install pcscd
@@ -15,6 +15,6 @@ Note that the QR scanning feature requires gnome-screenshot when using Wayland.
   sudo apt install gnome-screenshot
 
 === Integration with desktop environments
-Execute following command to integrate Seedkeeper PRO Manager to your environment:
+Execute following command to integrate Seedkeeper PRO to your environment:
 
     desktop_integration.sh --install

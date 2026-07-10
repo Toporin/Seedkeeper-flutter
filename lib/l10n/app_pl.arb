@@ -1,7 +1,7 @@
 {
     "@@locale": "pl",
 
-    "app_name": "Seedkeeper PRO Manager",
+    "app_name": "Seedkeeper PRO",
     "native_language_name": "Polski",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -950,8 +950,8 @@
     "l_admin_privileges_required": "Uprawnienia administratora są wymagane",
     "p_elevated_permissions_required": "Zarządzanie tym urządzeniem wymaga podwyższonych uprawnień. Opcjonalnie, możesz użyć ustawień systemu Windows do zarządzania konfiguracją FIDO.",
     "p_webauthn_elevated_permissions_required": "Zarządzanie WebAuthn wymaga podwyższonych uprawnień. Opcjonalnie, możesz użyć ustawień systemu Windows do zarządzania konfiguracją FIDO.",
-    "p_ms_store_permission_note": "Wersja aplikacji ze sklepu Microsoft Store zazwyczaj nie pozwala na podniesienie uprawnień ze względu na ograniczenia piaskownicy systemu Windows. Zalecamy zainstalowanie aplikacji Seedkeeper PRO Manager za pomocą naszego oficjalnego instalatora MSI.",
-    "p_need_camera_permission": "Seedkeeper PRO Manager wymaga dostępu do aparatu w celu skanowania kodów QR.",
+    "p_ms_store_permission_note": "Wersja aplikacji ze sklepu Microsoft Store zazwyczaj nie pozwala na podniesienie uprawnień ze względu na ograniczenia piaskownicy systemu Windows. Zalecamy zainstalowanie aplikacji Seedkeeper PRO za pomocą naszego oficjalnego instalatora MSI.",
+    "p_need_camera_permission": "Seedkeeper PRO wymaga dostępu do aparatu w celu skanowania kodów QR.",
     "@_qr_codes": {},
 
     "s_qr_scan": "Zeskanuj kod QR",
@@ -1073,7 +1073,7 @@
     "l_on_yk_nfc_tap": "Po zbliżeniu przez NFC",
     "l_on_yk_usb_insert": "Po włożeniu do portu USB",
     "l_do_nothing": "Nic nie rób",
-    "l_launch_ya": "Uruchom Seedkeeper PRO Manager",
+    "l_launch_ya": "Uruchom Seedkeeper PRO",
     "l_copy_otp_clipboard": "Kopiuj kod OTP do schowka",
     "l_launch_and_copy_otp": "Uruchom aplikację i kopiuj kod OTP",
     "l_kbd_layout_for_static": "Układ klawiatury (dla hasła statycznego)",

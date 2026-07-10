@@ -1,7 +1,7 @@
 {
     "@@locale": "ru",
 
-    "app_name": "Seedkeeper PRO Manager",
+    "app_name": "Seedkeeper PRO",
     "native_language_name": "Русский",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -950,8 +950,8 @@
     "l_admin_privileges_required": "Требуются права администратора",
     "p_elevated_permissions_required": "Для управления этим устройством требуются повышенные права. Также вы можете использовать Параметры Windows для управления конфигурацией FIDO.",
     "p_webauthn_elevated_permissions_required": "Для управления WebAuthn требуются повышенные права. Также вы можете использовать Параметры Windows для управления конфигурацией FIDO.",
-    "p_ms_store_permission_note": "Версия приложения для Microsoft Store, как правило, не может повысить разрешения из-за ограничений в песочнице Windows. Мы рекомендуем установить Seedkeeper PRO Manager с нашего официального установщика .msi.",
-    "p_need_camera_permission": "Seedkeeper PRO Manager требует разрешения камеры для сканирования QR-кодов.",
+    "p_ms_store_permission_note": "Версия приложения для Microsoft Store, как правило, не может повысить разрешения из-за ограничений в песочнице Windows. Мы рекомендуем установить Seedkeeper PRO с нашего официального установщика .msi.",
+    "p_need_camera_permission": "Seedkeeper PRO требует разрешения камеры для сканирования QR-кодов.",
     "@_qr_codes": {},
 
     "s_qr_scan": "Сканировать QR-код",
@@ -1073,7 +1073,7 @@
     "l_on_yk_nfc_tap": "При касании NFC",
     "l_on_yk_usb_insert": "При подключении USB",
     "l_do_nothing": "Ничего не делать",
-    "l_launch_ya": "Запустить Seedkeeper PRO Manager",
+    "l_launch_ya": "Запустить Seedkeeper PRO",
     "l_copy_otp_clipboard": "Скопировать OTP в буфер обмена",
     "l_launch_and_copy_otp": "Запустить приложение и скопировать OTP",
     "l_kbd_layout_for_static": "Раскладка клавиатуры (для статического пароля)",

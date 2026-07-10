@@ -9,7 +9,7 @@ fi
 echo "# Extract .app from .tar.gz"
 tar -xzf yubioath-desktop*.tar.gz
 
-xattr -r -d com.apple.quarantine "Seedkeeper PRO Manager.app"
+xattr -r -d com.apple.quarantine "Seedkeeper PRO.app"
 
 if [ -n "$1" ] && [ -n "$2" ] # Standalone
 then
@@ -37,23 +37,23 @@ echo "# Sign the Python binary (if it exists), without entitlements"
 codesign -f --timestamp --options runtime --sign 'Application' Seedkeeper\ PRO\ Manager.app/Contents/Resources/helper/_internal/Python
 
 echo "# Sign the GUI"
-codesign -f --timestamp --options runtime --sign 'Application' --entitlements Release.entitlements --deep "Seedkeeper PRO Manager.app"
+codesign -f --timestamp --options runtime --sign 'Application' --entitlements Release.entitlements --deep "Seedkeeper PRO.app"
 
 if [ -n "$1" ] && [ -n "$2" ] # Standalone
 then
 	echo "# Compress the .app to .zip and notarize"
-	ditto -c -k --sequesterRsrc --keepParent "Seedkeeper PRO Manager.app" "Seedkeeper PRO Manager.zip" 
-	STATUS=$(xcrun notarytool submit "Seedkeeper PRO Manager.zip" --apple-id $1 --team-id LQA3CS5MM7 --password $2 --wait)
+	ditto -c -k --sequesterRsrc --keepParent "Seedkeeper PRO.app" "Seedkeeper PRO.zip" 
+	STATUS=$(xcrun notarytool submit "Seedkeeper PRO.zip" --apple-id $1 --team-id LQA3CS5MM7 --password $2 --wait)
 	echo ${STATUS}
 
 	if [[ "$STATUS" == *"Accepted"* ]]; then
 		echo "# Notarization successfull. Staple the .app"
-		xcrun stapler staple -v "Seedkeeper PRO Manager.app"
+		xcrun stapler staple -v "Seedkeeper PRO.app"
 
 		echo "# Create dmg"
 		rm yubioath-desktop.dmg # Remove old .dmg
 		mkdir source_folder
-		mv "Seedkeeper PRO Manager.app" source_folder
+		mv "Seedkeeper PRO.app" source_folder
 		sh create-dmg.sh
 		echo "# .dmg created."
 	else
@@ -72,7 +72,7 @@ then
 	echo "# Everything should be ready for release!"
 else # App store
 	echo "# Build the package for AppStore submission"
-	productbuild --sign 'Installer' --component "Seedkeeper PRO Manager.app" /Applications/ output-appstore.pkg
+	productbuild --sign 'Installer' --component "Seedkeeper PRO.app" /Applications/ output-appstore.pkg
 fi
 
 echo "# End of script"

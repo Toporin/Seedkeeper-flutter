@@ -1,7 +1,7 @@
 {
     "@@locale": "fr",
 
-    "app_name": "Seedkeeper PRO Manager",
+    "app_name": "Seedkeeper PRO",
     "native_language_name": "Français",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -950,8 +950,8 @@
     "l_admin_privileges_required": "Privilèges d'administrateur requis",
     "p_elevated_permissions_required": "La gestion de cet appareil nécessite des privilèges élevés.",
     "p_webauthn_elevated_permissions_required": "La gestion WebAuthn nécessite des privilèges élevés.",
-    "p_ms_store_permission_note": "La version Microsoft Store de l'application n'est généralement pas en mesure d'élever les autorisations en raison des limitations du bac à sable de Windows. Nous recommandons d'installer Seedkeeper PRO Manager à partir de notre programme d'installation .msi officiel.",
-    "p_need_camera_permission": "Seedkeeper PRO Manager a besoin d'autorisations de caméra pour les codes QR.",
+    "p_ms_store_permission_note": "La version Microsoft Store de l'application n'est généralement pas en mesure d'élever les autorisations en raison des limitations du bac à sable de Windows. Nous recommandons d'installer Seedkeeper PRO à partir de notre programme d'installation .msi officiel.",
+    "p_need_camera_permission": "Seedkeeper PRO a besoin d'autorisations de caméra pour les codes QR.",
     "@_qr_codes": {},
 
     "s_qr_scan": "Scanner code QR",
@@ -1073,7 +1073,7 @@
     "l_on_yk_nfc_tap": "En appuyant sur NFC",
     "l_on_yk_usb_insert": "Sur insertion USB",
     "l_do_nothing": "Ne rien faire",
-    "l_launch_ya": "Lancer Seedkeeper PRO Manager",
+    "l_launch_ya": "Lancer Seedkeeper PRO",
     "l_copy_otp_clipboard": "Copier OTP dans presse-papiers",
     "l_launch_and_copy_otp": "Lancer application et copier OTP",
     "l_kbd_layout_for_static": "Configuration clavier (pour mot de passe statique)",

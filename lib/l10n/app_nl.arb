@@ -1,7 +1,7 @@
 {
     "@@locale": "nl",
 
-    "app_name": "Seedkeeper PRO Manager",
+    "app_name": "Seedkeeper PRO",
     "native_language_name": "Nederlands",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -950,8 +950,8 @@
     "l_admin_privileges_required": "Beheerdersrechten vereist",
     "p_elevated_permissions_required": "Voor het beheren van dit apparaat zijn verhoogde rechten nodig. U kunt ook Windows-instellingen gebruiken om de FIDO te beheren.",
     "p_webauthn_elevated_permissions_required": "Voor het beheren van WebAuthn zijn verhoogde rechten vereist. U kunt ook Windows-instellingen gebruiken om FIDO te beheren.",
-    "p_ms_store_permission_note": "De Microsoft Store versie van de app is over het algemeen niet in staat om rechten te verhogen vanwege de beperkingen voor sandboxen van Windows. We raden aan Seedkeeper PRO Manager te installeren via ons officiële installatieprogramma.",
-    "p_need_camera_permission": "Seedkeeper PRO Manager heeft rechten voor de camera nodig voor het scannen van QR-codes.",
+    "p_ms_store_permission_note": "De Microsoft Store versie van de app is over het algemeen niet in staat om rechten te verhogen vanwege de beperkingen voor sandboxen van Windows. We raden aan Seedkeeper PRO te installeren via ons officiële installatieprogramma.",
+    "p_need_camera_permission": "Seedkeeper PRO heeft rechten voor de camera nodig voor het scannen van QR-codes.",
     "@_qr_codes": {},
 
     "s_qr_scan": "QR-code scannen",
@@ -1073,7 +1073,7 @@
     "l_on_yk_nfc_tap": "Bij tik op NFC",
     "l_on_yk_usb_insert": "Bij invoegen USB",
     "l_do_nothing": "Doe niets",
-    "l_launch_ya": "Seedkeeper PRO Manager starten",
+    "l_launch_ya": "Seedkeeper PRO starten",
     "l_copy_otp_clipboard": "OTP naar klembord kopiëren",
     "l_launch_and_copy_otp": "Toepassing starten en OTP kopiëren",
     "l_kbd_layout_for_static": "Toetsenbordindeling (voor statisch wachtwoord)",

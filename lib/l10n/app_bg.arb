@@ -1,7 +1,7 @@
 {
     "@@locale": "bg",
 
-    "app_name": "Seedkeeper PRO Manager",
+    "app_name": "Seedkeeper PRO",
     "native_language_name": "Български",
     "@native_language_name": {
         "description": "IMPORTANT: This is the name of YOUR language written in YOUR language. For example: 'Deutsch' for German, 'Français' for French. DO NOT translate the word 'English'."
@@ -950,8 +950,8 @@
     "l_admin_privileges_required": "Необходими са администраторски права",
     "p_elevated_permissions_required": "Управлението на това устройство изисква повишени привилегии. Алтернативно, можете да използвате настройките на Windows, за да управлявате FIDO конфигурацията.",
     "p_webauthn_elevated_permissions_required": "Управлението на WebAuthn изисква повишени привилегии. Като алтернатива, можете да използвате настройките на Windows, за да управлявате FIDO конфигурацията.",
-    "p_ms_store_permission_note": "Версията на приложението от Microsoft Store като цяло не може да повиши разрешенията поради ограниченията за пясъчник на Windows. Препоръчваме да инсталирате Seedkeeper PRO Manager от нашия официален .msi инсталатор.",
-    "p_need_camera_permission": "Seedkeeper PRO Manager изисква разрешения за камера за сканиране на QR кодове.",
+    "p_ms_store_permission_note": "Версията на приложението от Microsoft Store като цяло не може да повиши разрешенията поради ограниченията за пясъчник на Windows. Препоръчваме да инсталирате Seedkeeper PRO от нашия официален .msi инсталатор.",
+    "p_need_camera_permission": "Seedkeeper PRO изисква разрешения за камера за сканиране на QR кодове.",
     "@_qr_codes": {},
 
     "s_qr_scan": "Сканирай QR код",
@@ -1073,7 +1073,7 @@
     "l_on_yk_nfc_tap": "При докосване с NFC",
     "l_on_yk_usb_insert": "При поставяне на USB",
     "l_do_nothing": "Не прави нищо",
-    "l_launch_ya": "Стартиране на Seedkeeper PRO Manager",
+    "l_launch_ya": "Стартиране на Seedkeeper PRO",
     "l_copy_otp_clipboard": "Копирай OTP в клипборда",
     "l_launch_and_copy_otp": "Стартирайте приложението и копирайте еднократната парола",
     "l_kbd_layout_for_static": "Клавиатурна подредба (за статична парола)",

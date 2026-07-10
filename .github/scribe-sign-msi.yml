@@ -6,6 +6,6 @@ jobs:
     steps:
       - id: 1
         action: windows
-        description: Seedkeeper PRO Manager
+        description: Seedkeeper PRO
         files:
           - installer/yubioath-desktop.msi

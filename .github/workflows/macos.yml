@@ -106,7 +106,7 @@ jobs:
       env:
         MACOS_SIGN_IDENTITY: ${{ secrets.MACOS_SIGN_IDENTITY }}
       run: |
-        APP="build/macos/Build/Products/Release/Seedkeeper PRO Manager.app"
+        APP="build/macos/Build/Products/Release/Seedkeeper PRO.app"
         IDENTITY="$MACOS_SIGN_IDENTITY"
         # Sign the helper binary, with entitlements + hardened runtime
         codesign -f --timestamp --options runtime --entitlements macos/helper.entitlements \
@@ -129,19 +129,19 @@ jobs:
         MACOS_NOTARY_KEY_ID: ${{ secrets.MACOS_NOTARY_KEY_ID }}
         MACOS_NOTARY_ISSUER_ID: ${{ secrets.MACOS_NOTARY_ISSUER_ID }}
       run: |
-        APP="build/macos/Build/Products/Release/Seedkeeper PRO Manager.app"
+        APP="build/macos/Build/Products/Release/Seedkeeper PRO.app"
         echo "$MACOS_NOTARY_KEY" | base64 --decode -o notary_key.p8
-        ditto -c -k --sequesterRsrc --keepParent "$APP" "Seedkeeper PRO Manager.zip"
-        xcrun notarytool submit "Seedkeeper PRO Manager.zip" \
+        ditto -c -k --sequesterRsrc --keepParent "$APP" "Seedkeeper PRO.zip"
+        xcrun notarytool submit "Seedkeeper PRO.zip" \
           --key notary_key.p8 --key-id "$MACOS_NOTARY_KEY_ID" --issuer "$MACOS_NOTARY_ISSUER_ID" --wait
         xcrun stapler staple -v "$APP"
-        rm notary_key.p8 "Seedkeeper PRO Manager.zip"
+        rm notary_key.p8 "Seedkeeper PRO.zip"
 
     - name: Create dmg
       run: |
         brew install create-dmg
         mkdir source_folder
-        cp -R build/macos/Build/Products/Release/"Seedkeeper PRO Manager.app" source_folder
+        cp -R build/macos/Build/Products/Release/"Seedkeeper PRO.app" source_folder
         cp resources/icons/dmg-background.png .
         sh create-dmg.sh
 
@@ -165,7 +165,7 @@ jobs:
         export REF=$(echo ${GITHUB_REF} | cut -d '/' -f 3)
         mkdir deploy
         mv yubioath-desktop.dmg deploy
-        tar -czf deploy/yubioath-desktop-${REF}.app.tar.gz -C build/macos/Build/Products/Release "Seedkeeper PRO Manager.app"
+        tar -czf deploy/yubioath-desktop-${REF}.app.tar.gz -C build/macos/Build/Products/Release "Seedkeeper PRO.app"
         mv create-dmg.sh deploy
         mv resources/icons/dmg-background.png deploy
         mv macos/helper.entitlements deploy

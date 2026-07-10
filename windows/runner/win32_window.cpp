@@ -128,7 +128,7 @@ bool Win32Window::Create(const std::wstring& title,
   // Attempt to create a mutex to enforce single instance.
   CreateMutex(NULL, TRUE, L"com.yubico.authenticator.mutex");
   if (GetLastError() == ERROR_ALREADY_EXISTS) {
-      HWND handle=FindWindow(L"FLUTTER_RUNNER_WIN32_WINDOW", L"Seedkeeper PRO Manager");
+      HWND handle=FindWindow(L"FLUTTER_RUNNER_WIN32_WINDOW", L"Seedkeeper PRO");
       WINDOWPLACEMENT place = { sizeof(WINDOWPLACEMENT) };
       GetWindowPlacement(handle, &place);
       switch(place.showCmd) {

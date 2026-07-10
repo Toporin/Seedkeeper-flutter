@@ -23,7 +23,7 @@ EXEC_DIRNAME=$(dirname "$0")
 EXEC_PATH=$(cd "$EXEC_DIRNAME" && pwd)
 
 help() {
-  echo "Integrate Seedkeeper PRO Manager with common desktop environments."
+  echo "Integrate Seedkeeper PRO with common desktop environments."
   echo
   echo "Usage: -i | --install    -- install desktop file"
   echo "       -u | --uninstall  -- uninstall desktop file"
