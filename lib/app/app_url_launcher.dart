@@ -16,13 +16,14 @@
 
 import 'package:url_launcher/url_launcher.dart';
 
-void launchDocumentationUrl() => _launchUrl('https://yubi.co/ya-documentation');
+void launchDocumentationUrl() => _launchUrl('https://docs.seedkeeper.io');
 
-void launchHelpUrl() => _launchUrl('https://yubi.co/ya-support');
+void launchHelpUrl() => _launchUrl('https://seedkeeper.io/support/');
 
-void launchTermsUrl() => _launchUrl('https://yubi.co/terms');
+void launchTermsUrl() =>
+    _launchUrl('https://seedkeeper.io/terms-and-conditions/');
 
-void launchPrivacyUrl() => _launchUrl('https://yubi.co/privacy');
+void launchPrivacyUrl() => _launchUrl('https://seedkeeper.io/privacy-policy/');
 
 void launchCrowdinUrl() => _launchUrl('https://yubi.co/ya-translations');
 

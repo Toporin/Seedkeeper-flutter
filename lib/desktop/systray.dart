@@ -97,14 +97,14 @@ String _getIcon() {
     return 'resources/icons/systray-template.png';
   }
   if (Platform.isWindows) {
-    return 'resources/icons/com.yubico.yubioath.ico';
+    return 'resources/icons/io.seedkeeper.pro.ico';
   }
 
   // if running in a sandbox, pass the icon name since the path is not visible
   // in the host system (see https://github.com/leanflutter/tray_manager/pull/43)
   return _runningInSandbox()
-      ? 'com.yubico.yubioath'
-      : 'resources/icons/com.yubico.yubioath-32x32.png';
+      ? 'io.seedkeeper.pro'
+      : 'resources/icons/io.seedkeeper.pro-32x32.png';
 }
 
 // copy from tray_manager package

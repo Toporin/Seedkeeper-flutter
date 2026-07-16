@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.seedkeeper.pro</id>
+  <launchable type="desktop-id">io.seedkeeper.pro.desktop</launchable>
+
+  <metadata_license>MIT</metadata_license>
+  <project_license>Apache-2.0</project_license>
+
+  <name>Seedkeeper PRO</name>
+  <summary>Graphical interface for managing a Seedkeeper</summary>
+  <url type="homepage">https://pro.seedkeeper.io</url>
+  <url type="contact">https://seedkeeper.io/support/</url>
+  <url type="bugtracker">https://github.com/Toporin/Seedkeeper-flutter/issues</url>
+  <content_rating type="oars-1.1"/>
+
+  <developer_name>Yubico</developer_name>
+
+</component>

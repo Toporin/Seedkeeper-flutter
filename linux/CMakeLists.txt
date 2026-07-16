@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
 set(BINARY_NAME "authenticator")
-set(APPLICATION_ID "com.yubico.yubioath")
+set(APPLICATION_ID "io.seedkeeper.pro")
 
 cmake_policy(SET CMP0063 NEW)
 
@@ -132,7 +132,7 @@ install(FILES "../resources/linux/README.adoc" DESTINATION "${BUILD_BUNDLE_DIR}"
 
 install(FILES "../assets/graphics/app-icon.png"
         DESTINATION "${BUILD_BUNDLE_DIR}/linux_support"
-        RENAME "com.yubico.yubioath.png")
+        RENAME "io.seedkeeper.pro.png")
 
 install(FILES "../resources/linux/desktop_integration.sh"
         DESTINATION "${BUILD_BUNDLE_DIR}"

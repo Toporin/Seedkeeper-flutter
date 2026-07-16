@@ -2,7 +2,7 @@
 Name=Seedkeeper PRO
 GenericName=Seedkeeper PRO
 Exec="@EXEC_PATH/authenticator"
-Icon=@EXEC_PATH/linux_support/com.yubico.yubioath.png
+Icon=@EXEC_PATH/linux_support/io.seedkeeper.pro.png
 Type=Application
 Categories=Utility;
-Keywords=Yubico;Authenticator;
+Keywords=Seedkeeper;NFC;Passkey;FIDO2;Authenticator;

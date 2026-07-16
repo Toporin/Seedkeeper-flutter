@@ -16,7 +16,7 @@
 # limitations under the License.
 #
 
-DESKTOP_FILENAME="com.yubico.yubioath.desktop"
+DESKTOP_FILENAME="io.seedkeeper.pro.desktop"
 DESKTOP_FILE="${HOME}/.local/share/applications/${DESKTOP_FILENAME}"
 
 EXEC_DIRNAME=$(dirname "$0")

@@ -12,7 +12,7 @@
       <WixVariable Id="WixUIBannerBmp" Value="resources\icons\yubico-msi-y-banner.png" />
       <WixVariable Id="WixUILicenseRtf" Value="resources\win\license.rtf" />
 
-      <Icon Id="icon.ico" SourceFile="resources\icons\com.yubico.yubioath.ico"/>
+      <Icon Id="icon.ico" SourceFile="resources\icons\io.seedkeeper.pro.ico"/>
       <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
       <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
