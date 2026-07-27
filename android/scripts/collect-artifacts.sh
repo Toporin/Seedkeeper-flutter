@@ -15,6 +15,7 @@ cp "${FLUTTER_APK}/app-arm64-v8a-release.apk"   artifacts/yubico-authenticator-a
 cp "${FLUTTER_APK}/app-armeabi-v7a-release.apk" artifacts/yubico-authenticator-armeabi-v7a-${REF}.apk
 cp "${FLUTTER_APK}/app-x86_64-release.apk"      artifacts/yubico-authenticator-x86_64-${REF}.apk
 cp "${FLUTTER_APK}/app-release.apk"             artifacts/yubico-authenticator-${REF}.apk
+cp build/app/outputs/bundle/release/app-release.aab artifacts/yubico-authenticator-${REF}.aab
 
 cp build/app/outputs/mapping/release/mapping.txt artifacts/
 

@@ -8,3 +8,4 @@ popd
 # Build flutter app
 flutter build apk --release --split-per-abi
 flutter build apk --release
+flutter build appbundle --release
