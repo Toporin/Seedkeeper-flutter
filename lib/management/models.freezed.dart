@@ -572,7 +572,7 @@ $VersionCopyWith<$Res> get version {
 /// @nodoc
 mixin _$DeviceInfo {
 
- DeviceConfig get config; int? get serial; Version get version; FormFactor get formFactor; Map<Transport, int> get supportedCapabilities; bool get isLocked; bool get isFips; bool get isSky; bool get pinComplexity; int get fipsCapable; int get fipsApproved; int get resetBlocked; VersionQualifier get versionQualifier;
+ DeviceConfig get config; int? get serial; Version get version; FormFactor get formFactor; Map<Transport, int> get supportedCapabilities; bool get isLocked; bool get isFips; bool get isSky; bool get pinComplexity; int get fipsCapable; int get fipsApproved; int get resetBlocked; VersionQualifier get versionQualifier; String? get seedkeeperAppletVersion;
 /// Create a copy of DeviceInfo
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -585,16 +585,16 @@ $DeviceInfoCopyWith<DeviceInfo> get copyWith => _$DeviceInfoCopyWithImpl<DeviceI
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeviceInfo&&(identical(other.config, config) || other.config == config)&&(identical(other.serial, serial) || other.serial == serial)&&(identical(other.version, version) || other.version == version)&&(identical(other.formFactor, formFactor) || other.formFactor == formFactor)&&const DeepCollectionEquality().equals(other.supportedCapabilities, supportedCapabilities)&&(identical(other.isLocked, isLocked) || other.isLocked == isLocked)&&(identical(other.isFips, isFips) || other.isFips == isFips)&&(identical(other.isSky, isSky) || other.isSky == isSky)&&(identical(other.pinComplexity, pinComplexity) || other.pinComplexity == pinComplexity)&&(identical(other.fipsCapable, fipsCapable) || other.fipsCapable == fipsCapable)&&(identical(other.fipsApproved, fipsApproved) || other.fipsApproved == fipsApproved)&&(identical(other.resetBlocked, resetBlocked) || other.resetBlocked == resetBlocked)&&(identical(other.versionQualifier, versionQualifier) || other.versionQualifier == versionQualifier));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DeviceInfo&&(identical(other.config, config) || other.config == config)&&(identical(other.serial, serial) || other.serial == serial)&&(identical(other.version, version) || other.version == version)&&(identical(other.formFactor, formFactor) || other.formFactor == formFactor)&&const DeepCollectionEquality().equals(other.supportedCapabilities, supportedCapabilities)&&(identical(other.isLocked, isLocked) || other.isLocked == isLocked)&&(identical(other.isFips, isFips) || other.isFips == isFips)&&(identical(other.isSky, isSky) || other.isSky == isSky)&&(identical(other.pinComplexity, pinComplexity) || other.pinComplexity == pinComplexity)&&(identical(other.fipsCapable, fipsCapable) || other.fipsCapable == fipsCapable)&&(identical(other.fipsApproved, fipsApproved) || other.fipsApproved == fipsApproved)&&(identical(other.resetBlocked, resetBlocked) || other.resetBlocked == resetBlocked)&&(identical(other.versionQualifier, versionQualifier) || other.versionQualifier == versionQualifier)&&(identical(other.seedkeeperAppletVersion, seedkeeperAppletVersion) || other.seedkeeperAppletVersion == seedkeeperAppletVersion));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,config,serial,version,formFactor,const DeepCollectionEquality().hash(supportedCapabilities),isLocked,isFips,isSky,pinComplexity,fipsCapable,fipsApproved,resetBlocked,versionQualifier);
+int get hashCode => Object.hash(runtimeType,config,serial,version,formFactor,const DeepCollectionEquality().hash(supportedCapabilities),isLocked,isFips,isSky,pinComplexity,fipsCapable,fipsApproved,resetBlocked,versionQualifier,seedkeeperAppletVersion);
 
 @override
 String toString() {
-  return 'DeviceInfo(config: $config, serial: $serial, version: $version, formFactor: $formFactor, supportedCapabilities: $supportedCapabilities, isLocked: $isLocked, isFips: $isFips, isSky: $isSky, pinComplexity: $pinComplexity, fipsCapable: $fipsCapable, fipsApproved: $fipsApproved, resetBlocked: $resetBlocked, versionQualifier: $versionQualifier)';
+  return 'DeviceInfo(config: $config, serial: $serial, version: $version, formFactor: $formFactor, supportedCapabilities: $supportedCapabilities, isLocked: $isLocked, isFips: $isFips, isSky: $isSky, pinComplexity: $pinComplexity, fipsCapable: $fipsCapable, fipsApproved: $fipsApproved, resetBlocked: $resetBlocked, versionQualifier: $versionQualifier, seedkeeperAppletVersion: $seedkeeperAppletVersion)';
 }
 
 
@@ -605,7 +605,7 @@ abstract mixin class $DeviceInfoCopyWith<$Res>  {
   factory $DeviceInfoCopyWith(DeviceInfo value, $Res Function(DeviceInfo) _then) = _$DeviceInfoCopyWithImpl;
 @useResult
 $Res call({
- DeviceConfig config, int? serial, Version version, FormFactor formFactor, Map<Transport, int> supportedCapabilities, bool isLocked, bool isFips, bool isSky, bool pinComplexity, int fipsCapable, int fipsApproved, int resetBlocked, VersionQualifier versionQualifier
+ DeviceConfig config, int? serial, Version version, FormFactor formFactor, Map<Transport, int> supportedCapabilities, bool isLocked, bool isFips, bool isSky, bool pinComplexity, int fipsCapable, int fipsApproved, int resetBlocked, VersionQualifier versionQualifier, String? seedkeeperAppletVersion
 });
 
 
@@ -622,7 +622,7 @@ class _$DeviceInfoCopyWithImpl<$Res>
 
 /// Create a copy of DeviceInfo
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? config = null,Object? serial = freezed,Object? version = null,Object? formFactor = null,Object? supportedCapabilities = null,Object? isLocked = null,Object? isFips = null,Object? isSky = null,Object? pinComplexity = null,Object? fipsCapable = null,Object? fipsApproved = null,Object? resetBlocked = null,Object? versionQualifier = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? config = null,Object? serial = freezed,Object? version = null,Object? formFactor = null,Object? supportedCapabilities = null,Object? isLocked = null,Object? isFips = null,Object? isSky = null,Object? pinComplexity = null,Object? fipsCapable = null,Object? fipsApproved = null,Object? resetBlocked = null,Object? versionQualifier = null,Object? seedkeeperAppletVersion = freezed,}) {
   return _then(_self.copyWith(
 config: null == config ? _self.config : config // ignore: cast_nullable_to_non_nullable
 as DeviceConfig,serial: freezed == serial ? _self.serial : serial // ignore: cast_nullable_to_non_nullable
@@ -637,7 +637,8 @@ as bool,fipsCapable: null == fipsCapable ? _self.fipsCapable : fipsCapable // ig
 as int,fipsApproved: null == fipsApproved ? _self.fipsApproved : fipsApproved // ignore: cast_nullable_to_non_nullable
 as int,resetBlocked: null == resetBlocked ? _self.resetBlocked : resetBlocked // ignore: cast_nullable_to_non_nullable
 as int,versionQualifier: null == versionQualifier ? _self.versionQualifier : versionQualifier // ignore: cast_nullable_to_non_nullable
-as VersionQualifier,
+as VersionQualifier,seedkeeperAppletVersion: freezed == seedkeeperAppletVersion ? _self.seedkeeperAppletVersion : seedkeeperAppletVersion // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 /// Create a copy of DeviceInfo
@@ -749,10 +750,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DeviceConfig config,  int? serial,  Version version,  FormFactor formFactor,  Map<Transport, int> supportedCapabilities,  bool isLocked,  bool isFips,  bool isSky,  bool pinComplexity,  int fipsCapable,  int fipsApproved,  int resetBlocked,  VersionQualifier versionQualifier)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DeviceConfig config,  int? serial,  Version version,  FormFactor formFactor,  Map<Transport, int> supportedCapabilities,  bool isLocked,  bool isFips,  bool isSky,  bool pinComplexity,  int fipsCapable,  int fipsApproved,  int resetBlocked,  VersionQualifier versionQualifier,  String? seedkeeperAppletVersion)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DeviceInfo() when $default != null:
-return $default(_that.config,_that.serial,_that.version,_that.formFactor,_that.supportedCapabilities,_that.isLocked,_that.isFips,_that.isSky,_that.pinComplexity,_that.fipsCapable,_that.fipsApproved,_that.resetBlocked,_that.versionQualifier);case _:
+return $default(_that.config,_that.serial,_that.version,_that.formFactor,_that.supportedCapabilities,_that.isLocked,_that.isFips,_that.isSky,_that.pinComplexity,_that.fipsCapable,_that.fipsApproved,_that.resetBlocked,_that.versionQualifier,_that.seedkeeperAppletVersion);case _:
   return orElse();
 
 }
@@ -770,10 +771,10 @@ return $default(_that.config,_that.serial,_that.version,_that.formFactor,_that.s
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DeviceConfig config,  int? serial,  Version version,  FormFactor formFactor,  Map<Transport, int> supportedCapabilities,  bool isLocked,  bool isFips,  bool isSky,  bool pinComplexity,  int fipsCapable,  int fipsApproved,  int resetBlocked,  VersionQualifier versionQualifier)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DeviceConfig config,  int? serial,  Version version,  FormFactor formFactor,  Map<Transport, int> supportedCapabilities,  bool isLocked,  bool isFips,  bool isSky,  bool pinComplexity,  int fipsCapable,  int fipsApproved,  int resetBlocked,  VersionQualifier versionQualifier,  String? seedkeeperAppletVersion)  $default,) {final _that = this;
 switch (_that) {
 case _DeviceInfo():
-return $default(_that.config,_that.serial,_that.version,_that.formFactor,_that.supportedCapabilities,_that.isLocked,_that.isFips,_that.isSky,_that.pinComplexity,_that.fipsCapable,_that.fipsApproved,_that.resetBlocked,_that.versionQualifier);case _:
+return $default(_that.config,_that.serial,_that.version,_that.formFactor,_that.supportedCapabilities,_that.isLocked,_that.isFips,_that.isSky,_that.pinComplexity,_that.fipsCapable,_that.fipsApproved,_that.resetBlocked,_that.versionQualifier,_that.seedkeeperAppletVersion);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -790,10 +791,10 @@ return $default(_that.config,_that.serial,_that.version,_that.formFactor,_that.s
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DeviceConfig config,  int? serial,  Version version,  FormFactor formFactor,  Map<Transport, int> supportedCapabilities,  bool isLocked,  bool isFips,  bool isSky,  bool pinComplexity,  int fipsCapable,  int fipsApproved,  int resetBlocked,  VersionQualifier versionQualifier)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DeviceConfig config,  int? serial,  Version version,  FormFactor formFactor,  Map<Transport, int> supportedCapabilities,  bool isLocked,  bool isFips,  bool isSky,  bool pinComplexity,  int fipsCapable,  int fipsApproved,  int resetBlocked,  VersionQualifier versionQualifier,  String? seedkeeperAppletVersion)?  $default,) {final _that = this;
 switch (_that) {
 case _DeviceInfo() when $default != null:
-return $default(_that.config,_that.serial,_that.version,_that.formFactor,_that.supportedCapabilities,_that.isLocked,_that.isFips,_that.isSky,_that.pinComplexity,_that.fipsCapable,_that.fipsApproved,_that.resetBlocked,_that.versionQualifier);case _:
+return $default(_that.config,_that.serial,_that.version,_that.formFactor,_that.supportedCapabilities,_that.isLocked,_that.isFips,_that.isSky,_that.pinComplexity,_that.fipsCapable,_that.fipsApproved,_that.resetBlocked,_that.versionQualifier,_that.seedkeeperAppletVersion);case _:
   return null;
 
 }
@@ -805,7 +806,7 @@ return $default(_that.config,_that.serial,_that.version,_that.formFactor,_that.s
 @JsonSerializable()
 
 class _DeviceInfo extends DeviceInfo {
-   _DeviceInfo(this.config, this.serial, this.version, this.formFactor, final  Map<Transport, int> supportedCapabilities, this.isLocked, this.isFips, this.isSky, this.pinComplexity, this.fipsCapable, this.fipsApproved, this.resetBlocked, this.versionQualifier): _supportedCapabilities = supportedCapabilities,super._();
+   _DeviceInfo(this.config, this.serial, this.version, this.formFactor, final  Map<Transport, int> supportedCapabilities, this.isLocked, this.isFips, this.isSky, this.pinComplexity, this.fipsCapable, this.fipsApproved, this.resetBlocked, this.versionQualifier, {this.seedkeeperAppletVersion}): _supportedCapabilities = supportedCapabilities,super._();
   factory _DeviceInfo.fromJson(Map<String, dynamic> json) => _$DeviceInfoFromJson(json);
 
 @override final  DeviceConfig config;
@@ -827,6 +828,7 @@ class _DeviceInfo extends DeviceInfo {
 @override final  int fipsApproved;
 @override final  int resetBlocked;
 @override final  VersionQualifier versionQualifier;
+@override final  String? seedkeeperAppletVersion;
 
 /// Create a copy of DeviceInfo
 /// with the given fields replaced by the non-null parameter values.
@@ -841,16 +843,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeviceInfo&&(identical(other.config, config) || other.config == config)&&(identical(other.serial, serial) || other.serial == serial)&&(identical(other.version, version) || other.version == version)&&(identical(other.formFactor, formFactor) || other.formFactor == formFactor)&&const DeepCollectionEquality().equals(other._supportedCapabilities, _supportedCapabilities)&&(identical(other.isLocked, isLocked) || other.isLocked == isLocked)&&(identical(other.isFips, isFips) || other.isFips == isFips)&&(identical(other.isSky, isSky) || other.isSky == isSky)&&(identical(other.pinComplexity, pinComplexity) || other.pinComplexity == pinComplexity)&&(identical(other.fipsCapable, fipsCapable) || other.fipsCapable == fipsCapable)&&(identical(other.fipsApproved, fipsApproved) || other.fipsApproved == fipsApproved)&&(identical(other.resetBlocked, resetBlocked) || other.resetBlocked == resetBlocked)&&(identical(other.versionQualifier, versionQualifier) || other.versionQualifier == versionQualifier));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DeviceInfo&&(identical(other.config, config) || other.config == config)&&(identical(other.serial, serial) || other.serial == serial)&&(identical(other.version, version) || other.version == version)&&(identical(other.formFactor, formFactor) || other.formFactor == formFactor)&&const DeepCollectionEquality().equals(other._supportedCapabilities, _supportedCapabilities)&&(identical(other.isLocked, isLocked) || other.isLocked == isLocked)&&(identical(other.isFips, isFips) || other.isFips == isFips)&&(identical(other.isSky, isSky) || other.isSky == isSky)&&(identical(other.pinComplexity, pinComplexity) || other.pinComplexity == pinComplexity)&&(identical(other.fipsCapable, fipsCapable) || other.fipsCapable == fipsCapable)&&(identical(other.fipsApproved, fipsApproved) || other.fipsApproved == fipsApproved)&&(identical(other.resetBlocked, resetBlocked) || other.resetBlocked == resetBlocked)&&(identical(other.versionQualifier, versionQualifier) || other.versionQualifier == versionQualifier)&&(identical(other.seedkeeperAppletVersion, seedkeeperAppletVersion) || other.seedkeeperAppletVersion == seedkeeperAppletVersion));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,config,serial,version,formFactor,const DeepCollectionEquality().hash(_supportedCapabilities),isLocked,isFips,isSky,pinComplexity,fipsCapable,fipsApproved,resetBlocked,versionQualifier);
+int get hashCode => Object.hash(runtimeType,config,serial,version,formFactor,const DeepCollectionEquality().hash(_supportedCapabilities),isLocked,isFips,isSky,pinComplexity,fipsCapable,fipsApproved,resetBlocked,versionQualifier,seedkeeperAppletVersion);
 
 @override
 String toString() {
-  return 'DeviceInfo(config: $config, serial: $serial, version: $version, formFactor: $formFactor, supportedCapabilities: $supportedCapabilities, isLocked: $isLocked, isFips: $isFips, isSky: $isSky, pinComplexity: $pinComplexity, fipsCapable: $fipsCapable, fipsApproved: $fipsApproved, resetBlocked: $resetBlocked, versionQualifier: $versionQualifier)';
+  return 'DeviceInfo(config: $config, serial: $serial, version: $version, formFactor: $formFactor, supportedCapabilities: $supportedCapabilities, isLocked: $isLocked, isFips: $isFips, isSky: $isSky, pinComplexity: $pinComplexity, fipsCapable: $fipsCapable, fipsApproved: $fipsApproved, resetBlocked: $resetBlocked, versionQualifier: $versionQualifier, seedkeeperAppletVersion: $seedkeeperAppletVersion)';
 }
 
 
@@ -861,7 +863,7 @@ abstract mixin class _$DeviceInfoCopyWith<$Res> implements $DeviceInfoCopyWith<$
   factory _$DeviceInfoCopyWith(_DeviceInfo value, $Res Function(_DeviceInfo) _then) = __$DeviceInfoCopyWithImpl;
 @override @useResult
 $Res call({
- DeviceConfig config, int? serial, Version version, FormFactor formFactor, Map<Transport, int> supportedCapabilities, bool isLocked, bool isFips, bool isSky, bool pinComplexity, int fipsCapable, int fipsApproved, int resetBlocked, VersionQualifier versionQualifier
+ DeviceConfig config, int? serial, Version version, FormFactor formFactor, Map<Transport, int> supportedCapabilities, bool isLocked, bool isFips, bool isSky, bool pinComplexity, int fipsCapable, int fipsApproved, int resetBlocked, VersionQualifier versionQualifier, String? seedkeeperAppletVersion
 });
 
 
@@ -878,7 +880,7 @@ class __$DeviceInfoCopyWithImpl<$Res>
 
 /// Create a copy of DeviceInfo
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? config = null,Object? serial = freezed,Object? version = null,Object? formFactor = null,Object? supportedCapabilities = null,Object? isLocked = null,Object? isFips = null,Object? isSky = null,Object? pinComplexity = null,Object? fipsCapable = null,Object? fipsApproved = null,Object? resetBlocked = null,Object? versionQualifier = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? config = null,Object? serial = freezed,Object? version = null,Object? formFactor = null,Object? supportedCapabilities = null,Object? isLocked = null,Object? isFips = null,Object? isSky = null,Object? pinComplexity = null,Object? fipsCapable = null,Object? fipsApproved = null,Object? resetBlocked = null,Object? versionQualifier = null,Object? seedkeeperAppletVersion = freezed,}) {
   return _then(_DeviceInfo(
 null == config ? _self.config : config // ignore: cast_nullable_to_non_nullable
 as DeviceConfig,freezed == serial ? _self.serial : serial // ignore: cast_nullable_to_non_nullable
@@ -893,7 +895,8 @@ as bool,null == fipsCapable ? _self.fipsCapable : fipsCapable // ignore: cast_nu
 as int,null == fipsApproved ? _self.fipsApproved : fipsApproved // ignore: cast_nullable_to_non_nullable
 as int,null == resetBlocked ? _self.resetBlocked : resetBlocked // ignore: cast_nullable_to_non_nullable
 as int,null == versionQualifier ? _self.versionQualifier : versionQualifier // ignore: cast_nullable_to_non_nullable
-as VersionQualifier,
+as VersionQualifier,seedkeeperAppletVersion: freezed == seedkeeperAppletVersion ? _self.seedkeeperAppletVersion : seedkeeperAppletVersion // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

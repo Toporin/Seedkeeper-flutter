@@ -65,6 +65,7 @@ _DeviceInfo _$DeviceInfoFromJson(Map<String, dynamic> json) => _DeviceInfo(
   (json['fips_approved'] as num).toInt(),
   (json['reset_blocked'] as num).toInt(),
   VersionQualifier.fromJson(json['version_qualifier'] as Map<String, dynamic>),
+  seedkeeperAppletVersion: json['seedkeeper_applet_version'] as String?,
 );
 
 Map<String, dynamic> _$DeviceInfoToJson(_DeviceInfo instance) =>
@@ -84,6 +85,7 @@ Map<String, dynamic> _$DeviceInfoToJson(_DeviceInfo instance) =>
       'fips_approved': instance.fipsApproved,
       'reset_blocked': instance.resetBlocked,
       'version_qualifier': instance.versionQualifier,
+      'seedkeeper_applet_version': instance.seedkeeperAppletVersion,
     };
 
 const _$FormFactorEnumMap = {

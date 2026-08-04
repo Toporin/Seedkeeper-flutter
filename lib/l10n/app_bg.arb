@@ -198,6 +198,14 @@
             }
         }
     },
+    "l_seedkeeper_applet_version": null,
+    "@l_seedkeeper_applet_version": {
+        "placeholders": {
+            "version": {
+                "type": "Object"
+            }
+        }
+    },
     "l_fips_capable": "Възможност за работа с FIPS",
     "l_fips_approved": "Одобрен от FIPS",
     "@_yubikey_interactions": {},

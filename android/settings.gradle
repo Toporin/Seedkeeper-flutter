@@ -47,7 +47,7 @@ include ':app'
 // Gradle does not support for source-dependency builds.
 def yubikitFork = file('../../yubikit-android')
 def yubikitRepo = 'https://github.com/Toporin/yubikit-android.git'
-def yubikitTag = '3.1.1-sk1'
+def yubikitTag = '3.1.1-sk2'
 if (!yubikitFork.exists()) {
     println "yubikit-android fork not found; cloning ${yubikitRepo} @ ${yubikitTag} into ${yubikitFork}"
     def process = new ProcessBuilder(

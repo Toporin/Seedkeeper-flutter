@@ -198,6 +198,14 @@
             }
         }
     },
+    "l_seedkeeper_applet_version": null,
+    "@l_seedkeeper_applet_version": {
+        "placeholders": {
+            "version": {
+                "type": "Object"
+            }
+        }
+    },
     "l_fips_capable": "Compatible FIPS",
     "l_fips_approved": "Approuvé par FIPS",
     "@_yubikey_interactions": {},

@@ -198,6 +198,14 @@
             }
         }
     },
+    "l_seedkeeper_applet_version": null,
+    "@l_seedkeeper_applet_version": {
+        "placeholders": {
+            "version": {
+                "type": "Object"
+            }
+        }
+    },
     "l_fips_capable": "Συμβατό με FIPS",
     "l_fips_approved": "Εγκεκριμένο κατά FIPS",
     "@_yubikey_interactions": {},

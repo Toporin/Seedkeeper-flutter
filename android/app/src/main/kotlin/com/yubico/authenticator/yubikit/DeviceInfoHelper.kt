@@ -18,6 +18,7 @@ package com.yubico.authenticator.yubikit
 
 import com.yubico.authenticator.compatUtil
 import com.yubico.authenticator.device.Info
+import com.yubico.authenticator.device.Version as DeviceVersion
 import com.yubico.authenticator.device.restrictedNfcDeviceInfo
 import com.yubico.authenticator.device.unknownDeviceWithCapability
 import com.yubico.yubikit.android.transport.nfc.NfcYubiKeyDevice
@@ -93,19 +94,23 @@ class DeviceInfoHelper {
                             } catch (_: ApplicationNotAvailableException) {
                                 // OATH applet not present
                             }
+                            var ctap2Session: Ctap2Session? = null
                             try {
-                                Ctap2Session(smartCardConnection)
+                                ctap2Session = Ctap2Session(smartCardConnection)
                                 logger.debug("Device supports FIDO2")
                                 capabilities = capabilities or Capability.FIDO2.bit
                             } catch (_: ApplicationNotAvailableException) {
                                 // FIDO2/CTAP2 applet not present
                             }
+                            var seedkeeperAppletVersion: String? = null
                             try {
                                 // Probe last so it doesn't disturb the OATH/FIDO2
                                 // session constructors above.
-                                SmartCardProtocol(smartCardConnection).select(seedkeeperAid)
+                                val protocol = SmartCardProtocol(smartCardConnection)
+                                protocol.select(seedkeeperAid)
                                 logger.debug("Device supports Seedkeeper")
                                 capabilities = capabilities or Capability.SEEDKEEPER.bit
+                                seedkeeperAppletVersion = readSeedkeeperAppletVersion(protocol)
                             } catch (_: ApplicationNotAvailableException) {
                                 // Seedkeeper applet not present
                             }
@@ -121,10 +126,20 @@ class DeviceInfoHelper {
                                     capabilities == Capability.FIDO2.bit -> "FIDO2 device"
                                     else -> "Security Key"
                                 }
+                                // For a Seedkeeper, report the same firmware version as
+                                // desktop: the CTAP2 firmware version, falling back to
+                                // 0.1.0 when CTAP2 doesn't expose one.
+                                val version = if (hasSeedkeeper) {
+                                    seedkeeperFirmwareVersion(ctap2Session)
+                                } else {
+                                    DeviceVersion(0, 0, 0)
+                                }
                                 return unknownDeviceWithCapability(
                                     device.transport,
                                     capabilities,
-                                    name
+                                    name,
+                                    version,
+                                    seedkeeperAppletVersion
                                 )
                             }
 
@@ -145,6 +160,43 @@ class DeviceInfoHelper {
 
             val name = DeviceUtil.getName(deviceInfo, pid?.type)
             return Info(name, device is NfcYubiKeyDevice, pid?.value, deviceInfo)
+        }
+
+        // Firmware version for a Seedkeeper, matching the desktop helper: the CTAP2
+        // firmware version (packed int major<<16 | minor<<8 | patch), or the 0.1.0
+        // fallback used by seedkeeper-manager when CTAP2 exposes none.
+        private fun seedkeeperFirmwareVersion(ctap2Session: Ctap2Session?): DeviceVersion {
+            val fw = ctap2Session?.cachedInfo?.firmwareVersion
+            return if (fw != null && fw > 0) {
+                DeviceVersion(
+                    ((fw shr 16) and 0xFF).toByte(),
+                    ((fw shr 8) and 0xFF).toByte(),
+                    (fw and 0xFF).toByte()
+                )
+            } else {
+                DeviceVersion(0, 1, 0)
+            }
+        }
+
+        // Read the Seedkeeper applet version via the getStatus APDU
+        // (CLA=0xB0 INS=0x3C). The response starts with
+        // [protocol_major, protocol_minor, applet_major, applet_minor]; formatted as
+        // "xx.yy-zz.vv". Returns null if the command fails or is too short.
+        private fun readSeedkeeperAppletVersion(protocol: SmartCardProtocol): String? = try {
+            val response = protocol.sendAndReceive(Apdu(0xB0, 0x3C, 0x00, 0x00, null))
+            if (response.size >= 4) {
+                val protocolMajor = response[0].toInt() and 0xFF
+                val protocolMinor = response[1].toInt() and 0xFF
+                val appletMajor = response[2].toInt() and 0xFF
+                val appletMinor = response[3].toInt() and 0xFF
+                "$protocolMajor.$protocolMinor-$appletMajor.$appletMinor"
+            } else {
+                logger.debug("Seedkeeper getStatus response too short: {}", response.size)
+                null
+            }
+        } catch (e: Exception) {
+            logger.debug("Failed to read Seedkeeper applet version: ", e)
+            null
         }
 
         private fun isNfcRestricted(connection: SmartCardConnection): Boolean =

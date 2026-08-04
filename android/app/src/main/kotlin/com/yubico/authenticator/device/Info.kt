@@ -60,7 +60,9 @@ data class Info(
     @SerialName("reset_blocked")
     val resetBlocked: Int,
     @SerialName("version_qualifier")
-    val versionQualifier: VersionQualifier
+    val versionQualifier: VersionQualifier,
+    @SerialName("seedkeeper_applet_version")
+    val seedkeeperAppletVersion: String? = null
 ) {
     constructor(name: String, isNfc: Boolean, usbPid: Int?, deviceInfo: DeviceInfo) : this(
         config = Config(deviceInfo.config),

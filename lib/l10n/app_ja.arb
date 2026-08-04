@@ -198,6 +198,14 @@
             }
         }
     },
+    "l_seedkeeper_applet_version": null,
+    "@l_seedkeeper_applet_version": {
+        "placeholders": {
+            "version": {
+                "type": "Object"
+            }
+        }
+    },
     "l_fips_capable": "FIPS対応",
     "l_fips_approved": "FIPS承認済み",
     "@_yubikey_interactions": {},

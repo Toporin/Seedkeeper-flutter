@@ -347,6 +347,15 @@ class _DeviceContent extends ConsumerWidget {
               color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
+        if (deviceData.info.seedkeeperAppletVersion != null)
+          Text(
+            l10n.l_seedkeeper_applet_version(
+              deviceData.info.seedkeeperAppletVersion!,
+            ),
+            style: Theme.of(context).textTheme.titleSmall?.apply(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+          ),
         if (deviceData.info.pinComplexity)
           Padding(
             padding: const EdgeInsets.only(top: 12),

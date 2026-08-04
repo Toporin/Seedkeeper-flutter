@@ -198,6 +198,14 @@
             }
         }
     },
+    "l_seedkeeper_applet_version": null,
+    "@l_seedkeeper_applet_version": {
+        "placeholders": {
+            "version": {
+                "type": "Object"
+            }
+        }
+    },
     "l_fips_capable": "תואם FIPS",
     "l_fips_approved": "מאושר FIPS",
     "@_yubikey_interactions": {},

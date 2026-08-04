@@ -118,8 +118,9 @@ abstract class DeviceInfo with _$DeviceInfo {
     int fipsCapable,
     int fipsApproved,
     int resetBlocked,
-    VersionQualifier versionQualifier,
-  ) = _DeviceInfo;
+    VersionQualifier versionQualifier, {
+    String? seedkeeperAppletVersion,
+  }) = _DeviceInfo;
 
   factory DeviceInfo.fromJson(Map<String, dynamic> json) =>
       _$DeviceInfoFromJson(json);

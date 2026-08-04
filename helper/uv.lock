@@ -41,7 +41,7 @@ requires-dist = [
     { name = "mss", specifier = ">=10.2.0,<11" },
     { name = "pillow", specifier = ">=12.2.0,<13" },
     { name = "pyscard", specifier = ">=2.3.1,<3" },
-    { name = "seedkeeper-manager", specifier = ">=5.9.5,<6" },
+    { name = "seedkeeper-manager", specifier = ">=5.9.7,<6" },
     { name = "zxing-cpp", specifier = ">=3.0.0,<4" },
 ]
 
@@ -255,7 +255,7 @@ name = "importlib-metadata"
 version = "9.0.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "zipp", marker = "python_full_version < '3.15'" },
+    { name = "zipp" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/a9/01/15bb152d77b21318514a96f43af312635eb2500c96b55398d020c93d86ea/importlib_metadata-9.0.0.tar.gz", hash = "sha256:a4f57ab599e6a2e3016d7595cfd72eb4661a5106e787a95bcc90c7105b831efc", size = 56405, upload-time = "2026-03-20T06:42:56.999Z" }
 wheels = [
@@ -780,7 +780,7 @@ wheels = [
 
 [[package]]
 name = "seedkeeper-manager"
-version = "5.9.5"
+version = "5.9.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
@@ -791,9 +791,9 @@ dependencies = [
     { name = "python-pskc" },
     { name = "pywin32", marker = "sys_platform == 'win32'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d2/39/92adcb1fe84298480402228620c534b70a34d4530955905d3f4cbc31d21c/seedkeeper_manager-5.9.5.tar.gz", hash = "sha256:98466f82681c4b6cc20e8a8c8f369edb027d263c393d2e7e5d0f1c71a0abad43", size = 239275, upload-time = "2026-06-19T07:21:52.77Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/99/65/9dccd43fca00831397fd3472445d4a0c9d068ccf0624600ba8c7f7daad00/seedkeeper_manager-5.9.7.tar.gz", hash = "sha256:4e7e1db9a86f4d41de0231e5e17f2f4085632233fcd031731aada9e080d4f5d3", size = 239772, upload-time = "2026-08-04T12:50:34.337Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/95/f5/6b69e13c35614854eb255abe3767784f0a9e9207a8702fafb6d48bea9a11/seedkeeper_manager-5.9.5-py3-none-any.whl", hash = "sha256:35efa6a5ef44c32348ab7839dda67d1bdde8e2cbf92cd08b897e0593cdba5382", size = 237811, upload-time = "2026-06-19T07:21:51.235Z" },
+    { url = "https://files.pythonhosted.org/packages/52/b8/2a1a33cf513b2c233a1cf6c0beb6ce0e84beaefcaec9a186027869ae9d84/seedkeeper_manager-5.9.7-py3-none-any.whl", hash = "sha256:c39db335888f2d6c6ac337c64b807a00c64799c9469ce3c6bb627f61b71e4ee2", size = 238207, upload-time = "2026-08-04T12:50:32.69Z" },
 ]
 
 [[package]]

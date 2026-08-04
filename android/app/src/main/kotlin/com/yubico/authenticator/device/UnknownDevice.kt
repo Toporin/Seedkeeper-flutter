@@ -46,7 +46,9 @@ val UnknownDevice = Info(
 fun unknownDeviceWithCapability(
     transport: Transport,
     bit: Int = 0,
-    name: String = "unknown-device"
+    name: String = "unknown-device",
+    version: Version = Version(0, 0, 0),
+    seedkeeperAppletVersion: String? = null
 ): Info {
     val isNfc = transport == Transport.NFC
     val capabilities = Capabilities(
@@ -57,7 +59,9 @@ fun unknownDeviceWithCapability(
         isNfc = isNfc,
         config = UnknownDevice.config.copy(enabledCapabilities = capabilities),
         supportedCapabilities = capabilities,
-        name = name
+        name = name,
+        version = version,
+        seedkeeperAppletVersion = seedkeeperAppletVersion
     )
 }
 
