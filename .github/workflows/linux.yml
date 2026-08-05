@@ -25,8 +25,13 @@ jobs:
     - name: Install dependencies
       run: |
         apt-get update
-        apt-get install -qq curl software-properties-common libnotify-dev libayatana-appindicator3-dev patchelf
-        add-apt-repository -y ppa:git-core/ppa
+        apt-get install -qq curl ca-certificates software-properties-common libnotify-dev libayatana-appindicator3-dev patchelf
+        # pre-commit needs git >= 2.31 (it runs `git ls-files --deduplicate`), but
+        # focal ships git 2.25. Pull a newer git from the git-core PPA added over
+        # HTTPS with [trusted=yes], so we depend on TLS to Launchpad instead of the
+        # flaky hkp GPG keyserver that add-apt-repository would otherwise contact.
+        echo "deb [trusted=yes] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu focal main" > /etc/apt/sources.list.d/git-core-ppa.list
+        apt-get update
         apt-get install -qq git
         git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
@@ -58,7 +63,10 @@ jobs:
     - name: Build the Helper
       if: steps.cache-helper.outputs.cache-hit != 'true'
       run: |
-        add-apt-repository ppa:ubuntu-toolchain-r/test -y
+        # gcc-13 comes from the ubuntu-toolchain-r PPA; add it over HTTPS with
+        # [trusted=yes] to avoid the flaky hkp GPG keyserver (TLS to Launchpad
+        # authenticates the source instead).
+        echo "deb [trusted=yes] https://ppa.launchpadcontent.net/ubuntu-toolchain-r/test/ubuntu focal main" > /etc/apt/sources.list.d/ubuntu-toolchain-r.list
         apt update -y
         apt-get install -qq swig libpcsclite-dev build-essential cmake gcc-13 g++-13
         update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 60 --slave /usr/bin/g++ g++ /usr/bin/g++-13 
@@ -109,7 +117,7 @@ jobs:
     - name: Rename and archive app
       run: |
         export REF=$(echo ${GITHUB_REF} | cut -d '/' -f 3)
-        export BASENAME="yubioath-desktop-${REF}-linux"
+        export BASENAME="seedkeeper-pro-desktop-linux"
         mkdir deploy
         mv build/linux/x64/release/bundle "build/${BASENAME}"
         tar -czf deploy/${BASENAME}.tar.gz -C build "${BASENAME}"
@@ -117,5 +125,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
-        name: yubioath-desktop-linux
+        name: seedkeeper-pro-desktop-linux
         path: deploy
