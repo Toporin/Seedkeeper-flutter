@@ -7,7 +7,7 @@ rm *.wxs
 rm *.wixpdb
 
 echo "Renaming the Actions folder and moving it"
-mv yubioath-desktop-* release
+mv seedkeeper-pro-* release
 
 echo "Signing the executables"
 signtool.exe sign /sha1 a1614cd84976030d49209b56162d9efa69b73698 /fd SHA256 /t http://timestamp.digicert.com/scripts/timstamp.dll release/authenticator.exe

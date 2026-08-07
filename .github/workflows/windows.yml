@@ -80,9 +80,7 @@ jobs:
 
       - name: Rename and archive app bundle
         run: |
-          $arr = $env:GITHUB_REF -split '/'
-          $branch = $arr[2]
-          $dest = "deploy\yubioath-desktop-$branch-windows"
+          $dest = "deploy\seedkeeper-pro-windows"
           mkdir $dest
           mv build\windows\x64\runner\Release\* $dest\
           mv resources\win\release-win.ps1 deploy
@@ -108,7 +106,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: yubioath-desktop-windows
+          name: seedkeeper-pro-windows
           path: deploy
 
   build-msi:
@@ -121,7 +119,7 @@ jobs:
       - name: Download signed app artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: yubioath-desktop-windows
+          name: seedkeeper-pro-windows
           path: signed-files
 
       - name: Read variables from repo
@@ -130,11 +128,9 @@ jobs:
 
       - name: Create an unsigned .msi installer package
         run: |
-          $arr = $env:GITHUB_REF -split '/'
-          $branch = $arr[2]
           $env:PATH += ";$env:WIX\bin"
-          $env:SRCDIR = "signed-files\yubioath-desktop-$branch-windows\"
-          heat dir .\signed-files\yubioath-desktop-$branch-windows\ -out fragment.wxs -gg -scom -srd -sfrag -dr INSTALLDIR -cg ApplicationFiles -var env.SRCDIR
+          $env:SRCDIR = "signed-files\seedkeeper-pro-windows\"
+          heat dir .\signed-files\seedkeeper-pro-windows\ -out fragment.wxs -gg -scom -srd -sfrag -dr INSTALLDIR -cg ApplicationFiles -var env.SRCDIR
           candle .\fragment.wxs .\resources\win\yubioath-desktop.wxs -ext WixUtilExtension -arch x64
           light fragment.wixobj yubioath-desktop.wixobj -ext WixUIExtension -ext WixUtilExtension -o yubioath-desktop.msi
 
@@ -171,7 +167,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: yubioath-desktop-windows
+          name: seedkeeper-pro-windows
           path: downloaded-artifact
 
       - name: Check for unsigned DLLs
