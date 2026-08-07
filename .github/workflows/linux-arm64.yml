@@ -122,7 +122,7 @@ jobs:
     - name: Rename and archive app
       run: |
         export REF=$(echo ${GITHUB_REF} | cut -d '/' -f 3)
-        export BASENAME="yubioath-desktop-${REF}-linux-arm64"
+        export BASENAME="seedkeeper-pro-linux-arm64"
         mkdir deploy
         mv build/linux/arm64/release/bundle "build/${BASENAME}"
         tar -czf deploy/${BASENAME}.tar.gz -C build "${BASENAME}"
@@ -130,5 +130,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
-        name: yubioath-desktop-linux-arm64
+        name: seedkeeper-pro-linux-arm64
         path: deploy

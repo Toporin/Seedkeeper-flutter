@@ -117,7 +117,7 @@ jobs:
     - name: Rename and archive app
       run: |
         export REF=$(echo ${GITHUB_REF} | cut -d '/' -f 3)
-        export BASENAME="seedkeeper-pro-desktop-linux"
+        export BASENAME="seedkeeper-pro-linux"
         mkdir deploy
         mv build/linux/x64/release/bundle "build/${BASENAME}"
         tar -czf deploy/${BASENAME}.tar.gz -C build "${BASENAME}"
@@ -125,5 +125,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
-        name: seedkeeper-pro-desktop-linux
+        name: seedkeeper-pro-linux
         path: deploy
