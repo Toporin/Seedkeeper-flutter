@@ -4,7 +4,7 @@
   <?define ProductVersion="7.4.1" ?>
   <?define ProductName="Seedkeeper PRO" ?>
 
-   <Product Id="*" UpgradeCode="fcbafc57-aaaa-47b8-b861-20bda48cd4f6" Name="$(var.ProductName)" Version="$(var.ProductVersion)" Manufacturer="Yubico AB" Language="1033">
+   <Product Id="*" UpgradeCode="fcbafc57-aaaa-47b8-b861-20bda48cd4f6" Name="$(var.ProductName)" Version="$(var.ProductVersion)" Manufacturer="Satochip" Language="1033">
       <Package InstallerVersion="301" Compressed="yes" InstallScope="perMachine" Platform="x64" Description="$(var.ProductName) $(var.ProductVersion)" />
       <Media Id="1" Cabinet="yubioathdesktop.cab" EmbedCab="yes"/>
 
@@ -50,7 +50,7 @@
 
       <Directory Id="TARGETDIR" Name="SourceDir">
          <Directory Id="ProgramFiles64Folder" Name="PFiles">
-            <Directory Id="YubicoDir" Name="Yubico">
+            <Directory Id="YubicoDir" Name="Satochip">
                 <Directory Id="INSTALLDIR" Name="Seedkeeper PRO">
                 </Directory>
             </Directory>
@@ -67,7 +67,7 @@
                   Target="[!fil793E9EB8753E3C01B3E26C3ADCE0FBB4]"
                   WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
           <RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall"/>
-          <RegistryValue Root="HKCU" Key="Software\Yubico\Seedkeeper PRO" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+          <RegistryValue Root="HKCU" Key="Software\Satochip\Seedkeeper PRO" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
           <util:RemoveFolderEx Id="Remove" On="install" Property="INSTALLDIR" />
         </Component>
       </DirectoryRef>
