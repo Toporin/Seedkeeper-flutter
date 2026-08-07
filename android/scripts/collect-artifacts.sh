@@ -1,21 +1,16 @@
 #!/bin/bash -x
 
-GITHUB_REF=`git branch --show-current`
-if [ $# -gt 0 ] ; then
-   GITHUB_REF="$1"
-fi
-
-export REF=$(echo ${GITHUB_REF} | cut -d '/' -f 3,4,5,6,7 | sed -r 's/\//_/g')
+export BASENAME="seedkeeper-pro-android"
 export FLUTTER_APK=build/app/outputs/flutter-apk
 export NATIVE_LIBS=build/app/intermediates/merged_native_libs/release/mergeReleaseNativeLibs/out/lib
 
 rm -rf artifacts
 mkdir artifacts
-cp "${FLUTTER_APK}/app-arm64-v8a-release.apk"   artifacts/yubico-authenticator-arm64-v8a-${REF}.apk
-cp "${FLUTTER_APK}/app-armeabi-v7a-release.apk" artifacts/yubico-authenticator-armeabi-v7a-${REF}.apk
-cp "${FLUTTER_APK}/app-x86_64-release.apk"      artifacts/yubico-authenticator-x86_64-${REF}.apk
-cp "${FLUTTER_APK}/app-release.apk"             artifacts/yubico-authenticator-${REF}.apk
-cp build/app/outputs/bundle/release/app-release.aab artifacts/yubico-authenticator-${REF}.aab
+cp "${FLUTTER_APK}/app-arm64-v8a-release.apk"   artifacts/${BASENAME}-arm64-v8a.apk
+cp "${FLUTTER_APK}/app-armeabi-v7a-release.apk" artifacts/${BASENAME}-armeabi-v7a.apk
+cp "${FLUTTER_APK}/app-x86_64-release.apk"      artifacts/${BASENAME}-x86_64.apk
+cp "${FLUTTER_APK}/app-release.apk"             artifacts/${BASENAME}.apk
+cp build/app/outputs/bundle/release/app-release.aab artifacts/${BASENAME}.aab
 
 cp build/app/outputs/mapping/release/mapping.txt artifacts/
 

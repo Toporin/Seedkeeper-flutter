@@ -76,10 +76,10 @@ jobs:
         working-directory: ./app/android
 
       - name: Collect artifacts
-        run: android/scripts/collect-artifacts.sh ${GITHUB_REF}
+        run: android/scripts/collect-artifacts.sh
         working-directory: ./app
 
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: yubico-authenticator-android
+          name: seedkeeper-pro-android
           path: app/artifacts/*
