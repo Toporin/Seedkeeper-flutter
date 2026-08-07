@@ -132,12 +132,12 @@ jobs:
           $env:SRCDIR = "signed-files\seedkeeper-pro-windows\"
           heat dir .\signed-files\seedkeeper-pro-windows\ -out fragment.wxs -gg -scom -srd -sfrag -dr INSTALLDIR -cg ApplicationFiles -var env.SRCDIR
           candle .\fragment.wxs .\resources\win\yubioath-desktop.wxs -ext WixUtilExtension -arch x64
-          light fragment.wixobj yubioath-desktop.wixobj -ext WixUIExtension -ext WixUtilExtension -o yubioath-desktop.msi
+          light fragment.wixobj yubioath-desktop.wixobj -ext WixUIExtension -ext WixUtilExtension -o seedkeeper-pro-windows.msi
 
       - name: Move .msi into installer dir
         run: |
           mkdir installer
-          mv yubioath-desktop.msi installer
+          mv seedkeeper-pro-windows.msi installer
 
       - name: Sign MSI with Azure Trusted Signing
         uses: azure/trusted-signing-action@208f8af4bf26cf2af8597424e3cb5582801523ba # v2.0.0
