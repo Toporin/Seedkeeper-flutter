@@ -153,19 +153,19 @@ jobs:
         MACOS_NOTARY_KEY_ID: ${{ secrets.MACOS_NOTARY_KEY_ID }}
         MACOS_NOTARY_ISSUER_ID: ${{ secrets.MACOS_NOTARY_ISSUER_ID }}
       run: |
-        codesign -f --timestamp --options runtime --sign "$MACOS_SIGN_IDENTITY" yubioath-desktop.dmg
+        codesign -f --timestamp --options runtime --sign "$MACOS_SIGN_IDENTITY" seedkeeper-pro-macos.dmg
         echo "$MACOS_NOTARY_KEY" | base64 --decode -o notary_key.p8
-        xcrun notarytool submit yubioath-desktop.dmg \
+        xcrun notarytool submit seedkeeper-pro-macos.dmg \
           --key notary_key.p8 --key-id "$MACOS_NOTARY_KEY_ID" --issuer "$MACOS_NOTARY_ISSUER_ID" --wait
-        xcrun stapler staple -v yubioath-desktop.dmg
+        xcrun stapler staple -v seedkeeper-pro-macos.dmg
         rm notary_key.p8
 
     - name: Rename and archive app bundle
       run: |
         export REF=$(echo ${GITHUB_REF} | cut -d '/' -f 3)
         mkdir deploy
-        mv yubioath-desktop.dmg deploy
-        tar -czf deploy/yubioath-desktop-${REF}.app.tar.gz -C build/macos/Build/Products/Release "Seedkeeper PRO.app"
+        mv seedkeeper-pro-macos.dmg deploy
+        tar -czf deploy/seedkeeper-pro-macos-${REF}.app.tar.gz -C build/macos/Build/Products/Release "Seedkeeper PRO.app"
         mv create-dmg.sh deploy
         mv resources/icons/dmg-background.png deploy
         mv macos/helper.entitlements deploy
@@ -176,5 +176,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
-        name: yubioath-desktop-macos
+        name: seedkeeper-pro-macos
         path: deploy

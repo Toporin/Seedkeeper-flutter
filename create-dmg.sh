@@ -6,5 +6,5 @@ create-dmg \
 --icon-size 100 \
 --icon "Seedkeeper PRO.app" 200 190 \
 --app-drop-link 600 185 \
-"yubioath-desktop.dmg" \
+"seedkeeper-pro-macos.dmg" \
 "source_folder/"

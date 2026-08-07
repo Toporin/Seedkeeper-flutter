@@ -7,7 +7,7 @@ then
 fi
 
 echo "# Extract .app from .tar.gz"
-tar -xzf yubioath-desktop*.tar.gz
+tar -xzf seedkeeper-pro-macos*.tar.gz
 
 xattr -r -d com.apple.quarantine "Seedkeeper PRO.app"
 
@@ -51,7 +51,7 @@ then
 		xcrun stapler staple -v "Seedkeeper PRO.app"
 
 		echo "# Create dmg"
-		rm yubioath-desktop.dmg # Remove old .dmg
+		rm seedkeeper-pro-macos.dmg # Remove old .dmg
 		mkdir source_folder
 		mv "Seedkeeper PRO.app" source_folder
 		sh create-dmg.sh
@@ -62,12 +62,12 @@ then
 	fi
 
 	echo "# Sign the .dmg"
-	codesign -f --timestamp --options runtime --sign 'Application' yubioath-desktop.dmg
+	codesign -f --timestamp --options runtime --sign 'Application' seedkeeper-pro-macos.dmg
 	echo "# Notarize the .dmg"
-	STATUS=$(xcrun notarytool submit "yubioath-desktop.dmg" --apple-id $1 --team-id LQA3CS5MM7 --password $2 --wait)
+	STATUS=$(xcrun notarytool submit "seedkeeper-pro-macos.dmg" --apple-id $1 --team-id LQA3CS5MM7 --password $2 --wait)
 	echo ${STATUS}
 	echo "# Staple the .dmg"
-	xcrun stapler staple -v yubioath-desktop.dmg
+	xcrun stapler staple -v seedkeeper-pro-macos.dmg
 
 	echo "# Everything should be ready for release!"
 else # App store
